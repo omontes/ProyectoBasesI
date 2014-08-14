@@ -13,6 +13,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -29,11 +30,13 @@ public class ClienteDAO extends DAO {
     
     }
 
-    public ArrayList<PaqueteDTO> consultarPaquetes() throws Exception {
+    public ArrayList<PaqueteDTO> consultarPaquetes(String cliente) throws Exception {
         ArrayList<PaqueteDTO> listaPaquetes = new ArrayList<PaqueteDTO>();
         try {
             String consularPaquetes_Cliente= this.leerSQL("/ArchivosSQL/ConsultaPaquetes_Cliente.sql");
-            ResultSet rs = statement.executeQuery(consularPaquetes_Cliente);
+            PreparedStatement stm = conexion.prepareStatement(consularPaquetes_Cliente);
+            stm.setString(1,cliente);
+            ResultSet rs = stm.executeQuery();
             while (rs.next()) {
                 PaqueteDTO paquete = new PaqueteDTO();
                 paquete.setDescripcion(rs.getString("descripcion"));
