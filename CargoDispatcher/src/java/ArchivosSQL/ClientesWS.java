@@ -4,15 +4,14 @@
  * and open the template in the editor.
  */
 
-package REST;
+package ArchivosSQL;
 
-import DAO.RutaEnvioDAO;
-import DTO.RutaEnvioDTO;
+import DAO.ClienteDAO;
+import DTO.PaqueteDTO;
 import com.google.gson.Gson;
 import java.util.ArrayList;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.UriInfo;
-import javax.ws.rs.PathParam;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
@@ -24,31 +23,28 @@ import javax.ws.rs.Produces;
  *
  * @author Oscar Montes
  */
-@Path("generic")
-public class RutasWS {
+@Path("cliente")
+public class ClientesWS {
 
     @Context
     private UriInfo context;
 
     /**
-     * Creates a new instance of ContenedoresWS
+     * Creates a new instance of ClientesWS
      */
-    public RutasWS() {
+    public ClientesWS() {
     }
 
-    /**
-     * Retrieves representation of an instance of REST.RutasWS
-     * @return an instance of java.lang.String
-     */
-   @GET
-    @Path("/getRutas")
+   
+    @GET
+    @Path("/getPaquetes")
     @Produces("application/json")
-    public String getRutas() {
+    public String getPaquetes() {
         String feeds = null;
         try {
-            RutaEnvioDAO rutadao = new RutaEnvioDAO();
-            ArrayList<RutaEnvioDTO> feedData = null;
-            feedData=rutadao.consultarRutas();
+            ClienteDAO cliente_dao = new ClienteDAO();
+            ArrayList<PaqueteDTO> feedData = null;
+            feedData=cliente_dao.consultarPaquetes();
             Gson gson = new Gson();
             System.out.println("Llego aqui");
             System.out.println(gson.toJson(feedData));
@@ -59,9 +55,8 @@ public class RutasWS {
         return feeds;
     }
 
-
     /**
-     * PUT method for updating or creating an instance of HelloWorld
+     * PUT method for updating or creating an instance of ClientesWS
      * @param content representation for the resource
      * @return an HTTP response with content of the updated or created resource.
      */

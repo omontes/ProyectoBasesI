@@ -30,6 +30,7 @@ public class ApplicationConfig extends Application {
      * If required, comment out calling this method in getClasses().
      */
     private void addRestResourceClasses(Set<Class<?>> resources) {
+        resources.add(ArchivosSQL.ClientesWS.class);
         resources.add(REST.EmployeeWS.class);
         resources.add(REST.RutasWS.class);
     }
