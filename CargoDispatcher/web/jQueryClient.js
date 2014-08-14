@@ -1,5 +1,5 @@
  // The root URL for the RESTful services
-var rootURL = "http://localhost:8080/CargoDispatcher/webresources/generic/getRutas";
+var rootURL = "http://localhost:8080/CargoDispatcher/webresources/cliente";
 
 // Retrieve Employees list when application starts 
 findAll();
@@ -10,7 +10,7 @@ function findAll() {
 	console.log('findAll');
 	$.ajax({
 		type: 'GET',
-		url: rootURL,
+		url: rootURL +'/getPaquetes/'+ "Oscar Montes",
 		dataType: "json", // data type of response
 		success: function(data){
                         $('#h1').append("Consulta Realizada");
@@ -20,7 +20,7 @@ function findAll() {
 }
 
 function renderList(data) {
-        $('#h1').append(data[0].nombre);
+        $('#h1').append(data[0].descripcion);
         //var list = JSON.parse(data);
 	//$('#employeeList li').remove();
         //var i;

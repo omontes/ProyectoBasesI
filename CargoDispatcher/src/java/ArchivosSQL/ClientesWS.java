@@ -16,6 +16,7 @@ import javax.ws.rs.Consumes;
 import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.GET;
+import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 
 /**
@@ -37,14 +38,14 @@ public class ClientesWS {
 
    
     @GET
-    @Path("/getPaquetes")
+    @Path("/getPaquetes/{query}")
     @Produces("application/json")
-    public String getPaquetes() {
+    public String getPaquetes(@PathParam("query") String query) {
         String feeds = null;
         try {
             ClienteDAO cliente_dao = new ClienteDAO();
             ArrayList<PaqueteDTO> feedData = null;
-            feedData=cliente_dao.consultarPaquetes();
+            feedData=cliente_dao.consultarPaquetes(query);
             Gson gson = new Gson();
             System.out.println("Llego aqui");
             System.out.println(gson.toJson(feedData));
