@@ -6,7 +6,8 @@
 
 package DAO;
 
-import DTO.RutaEnvioDTO;
+import DTO.ClienteDTO;
+import DTO.PaqueteDTO;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
@@ -16,52 +17,41 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
-import javax.naming.InitialContext;
 import javax.naming.NamingException;
-import javax.sql.DataSource;
-
 
 /**
  *
  * @author Oscar Montes
  */
-public class RutaEnvioDAO extends DAO {
-       
-    public RutaEnvioDAO() throws SQLException, NamingException{
-    
-    
+public class ClienteDAO extends DAO {
 
-    }
-    /******* OPERACIONES BASICAS QUE SE REALIZAN A LA BASE DE DATOS *******/
+    public ClienteDAO() throws SQLException, NamingException{
     
-    /**
-     * Este metodo realiza una consulta a la tabla de Departamentos y obtiene
-     * la informacion Dname, Dno y Total_sal
-     */ 
-    public ArrayList<RutaEnvioDTO> consultarRutas() throws Exception {
-        ArrayList<RutaEnvioDTO> lsitaRutas = new ArrayList<RutaEnvioDTO>();
+    }
+
+    public ArrayList<PaqueteDTO> consultarPaquetes() throws Exception {
+        ArrayList<PaqueteDTO> listaPaquetes = new ArrayList<PaqueteDTO>();
         try {
-            String consultarRutas= this.leerSQL("/ArchivosSQL/ConsultaRutas.sql");
-            ResultSet rs = statement.executeQuery(consultarRutas);
+            String consularPaquetes_Cliente= this.leerSQL("/ArchivosSQL/ConsultaPaquetes_Cliente.sql");
+            ResultSet rs = statement.executeQuery(consularPaquetes_Cliente);
             while (rs.next()) {
-                RutaEnvioDTO rutaEnvio = new RutaEnvioDTO();
-                rutaEnvio.setNombre(rs.getString("nombre"));
-                rutaEnvio.setIdRutaEnvio(rs.getInt("idRutaEnvio"));
-                lsitaRutas.add(rutaEnvio);
+                PaqueteDTO paquete = new PaqueteDTO();
+                paquete.setDescripcion(rs.getString("descripcion"));
+                paquete.setIdPaquete(rs.getInt("idPaquete"));
+                listaPaquetes.add(paquete);
             }  
             statement.close();
-            return lsitaRutas;
+            return listaPaquetes;
             
 
 
         } catch (Exception e) {
-            System.out.println("Error al realizar la consulta de contenedores");
+            System.out.println("Error al realizar la consulta de paquetes por cliente");
             throw(e);
 
         }
 
     }
-    
       /**
      * Realiza la lectura del archivo sql
      * @param direccion
@@ -80,5 +70,7 @@ public class RutaEnvioDAO extends DAO {
             }
         }
         return sb.toString();
-    }
+    }  
+      
+      
 }
