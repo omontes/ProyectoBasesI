@@ -24,9 +24,9 @@ import javax.naming.NamingException;
  *
  * @author Oscar Montes
  */
-public class ClienteDAO extends DAO {
+public class DAOImpl extends DAO {
 
-    public ClienteDAO() throws SQLException, NamingException{
+    public DAOImpl() throws SQLException, NamingException{
     
     }
 
@@ -41,6 +41,7 @@ public class ClienteDAO extends DAO {
                 PaqueteDTO paquete = new PaqueteDTO();
                 paquete.setDescripcion(rs.getString("descripcion"));
                 paquete.setIdPaquete(rs.getInt("idPaquete"));
+                
                 listaPaquetes.add(paquete);
             }  
             statement.close();
