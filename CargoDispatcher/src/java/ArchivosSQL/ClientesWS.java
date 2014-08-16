@@ -6,7 +6,7 @@
 
 package ArchivosSQL;
 
-import DAO.ClienteDAO;
+import DAO.ClienteDAOImpl;
 import DTO.PaqueteDTO;
 import com.google.gson.Gson;
 import java.util.ArrayList;
@@ -43,9 +43,9 @@ public class ClientesWS {
     public String getPaquetes(@PathParam("query") String query) {
         String feeds = null;
         try {
-            ClienteDAO cliente_dao = new ClienteDAO();
+            ClienteDAOImpl cliente_dao = new ClienteDAOImpl();
             ArrayList<PaqueteDTO> feedData = null;
-            feedData=cliente_dao.consultarPaquetes(query);
+            feedData=cliente_dao.findAllPaquetes(query);
             Gson gson = new Gson();
             System.out.println("Llego aqui");
             System.out.println(gson.toJson(feedData));
