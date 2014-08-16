@@ -19,6 +19,7 @@ public class PaqueteDTO {
      private BigDecimal valor;
      private int idCategoria;
      private int idContenedor;
+     private String estadoActual;
 
     /**
      * @return the idPaqueteDTO
@@ -102,5 +103,19 @@ public class PaqueteDTO {
      */
     public void setIdContenedor(int idContenedor) {
         this.idContenedor = idContenedor;
+    }
+
+    /**
+     * @return the estadoActual
+     */
+    public String getEstadoActual() {
+        return estadoActual;
+    }
+
+    /**
+     * @param estadoActual the estadoActual to set
+     */
+    public void setEstadoActual(String estadoActual) {
+        this.estadoActual = estadoActual;
     }
 }
