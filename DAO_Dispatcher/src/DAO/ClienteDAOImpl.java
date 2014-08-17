@@ -29,17 +29,12 @@ import javax.sql.DataSource;
  *
  * @author Carlos
  */
-public class ClienteDAOImpl implements ClienteDAO{
+public class ClienteDAOImpl extends DAO implements ClienteDAO {
     
-    public Connection conexion;
-    public Statement statement;
+  
 
     public ClienteDAOImpl() throws SQLException, NamingException {
-        InitialContext ctx = new InitialContext();
-        DataSource ds = (DataSource) ctx.lookup("jdbc/cargodispatcher");
-        Connection con = ds.getConnection();
-        this.conexion=con;
-        this.statement=con.createStatement();
+        
     }
 
         private String leerSQL(String direccion) throws IOException {
@@ -58,7 +53,7 @@ public class ClienteDAOImpl implements ClienteDAO{
 
     @Override
     public ArrayList<PaqueteDTO> findAllPaquetes(String cliente) {
-        ArrayList<PaqueteDTO> Paquetes = null;
+        ArrayList<PaqueteDTO> Paquetes = new ArrayList<PaqueteDTO>();
         try {
             String consularPaquetes_Cliente= this.leerSQL("/ArchivosSQL/ConsultaPaquetes_Cliente.sql");
             PreparedStatement stm = conexion.prepareStatement(consularPaquetes_Cliente);
@@ -66,9 +61,9 @@ public class ClienteDAOImpl implements ClienteDAO{
             ResultSet rs = stm.executeQuery();
             while (rs.next()) {
                 PaqueteDTO paquete = new PaqueteDTO();
-                paquete.setDescripcion(rs.getString("descripcion"));
                 paquete.setIdPaquete(rs.getInt("idPaquete"));
-                paquete.setEstadoActual(rs.getString("Descripcion"));
+                paquete.setDescripcion(rs.getString("descripcion"));
+                paquete.setEstadoActual(rs.getString("EstadoActual"));
                 Paquetes.add(paquete);
             }  
             statement.close();
@@ -82,6 +77,7 @@ public class ClienteDAOImpl implements ClienteDAO{
             }
         }
         return null;
+        
     }
     
 }
