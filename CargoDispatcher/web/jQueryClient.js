@@ -10,7 +10,7 @@ function findAll() {
 	console.log('findAll');
 	$.ajax({
 		type: 'GET',
-		url: rootURL +'/getPaquetes/'+ "Miguel Taylor",
+		url: rootURL +'/getPaquetes/'+ "Pancho Vindas",
 		dataType: "json", // data type of response
 		success: function(data){
                         $('#h1').append("Consulta Realizada");

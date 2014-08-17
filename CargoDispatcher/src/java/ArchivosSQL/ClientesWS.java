@@ -11,7 +11,6 @@ import DTO.PaqueteDTO;
 import com.google.gson.Gson;
 import java.util.ArrayList;
 import javax.ws.rs.core.Context;
-import javax.ws.rs.core.UriInfo;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
@@ -27,9 +26,7 @@ import javax.ws.rs.Produces;
 @Path("cliente")
 public class ClientesWS {
 
-    @Context
-    private UriInfo context;
-
+    
     /**
      * Creates a new instance of ClientesWS
      */
@@ -47,8 +44,6 @@ public class ClientesWS {
             ArrayList<PaqueteDTO> feedData = null;
             feedData=cliente_dao.findAllPaquetes(query);
             Gson gson = new Gson();
-            System.out.println("Llego aqui");
-            System.out.println(gson.toJson(feedData));
             feeds = gson.toJson(feedData);
         } catch (Exception e) {
             System.out.println("Exception Error"); //Console 
