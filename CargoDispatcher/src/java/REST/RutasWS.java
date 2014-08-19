@@ -24,7 +24,7 @@ import javax.ws.rs.Produces;
  *
  * @author Oscar Montes
  */
-@Path("generic")
+@Path("ruta")
 public class RutasWS {
 
     @Context
@@ -35,12 +35,11 @@ public class RutasWS {
      */
     public RutasWS() {
     }
-
     /**
      * Retrieves representation of an instance of REST.RutasWS
      * @return an instance of java.lang.String
      */
-   @GET
+    @GET
     @Path("/getRutas")
     @Produces("application/json")
     public String getRutas() {

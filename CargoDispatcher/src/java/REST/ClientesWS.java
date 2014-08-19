@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 
-package ArchivosSQL;
+package REST;
 
 import DAO.ClienteDAOImpl;
 import DTO.PaqueteDTO;
