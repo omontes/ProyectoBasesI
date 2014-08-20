@@ -89,6 +89,7 @@ public class ClienteDAOImpl extends DAO implements ClienteDAO {
             while (rs.next()) {
                 ClienteDTO cliente = new ClienteDTO();
                 cliente.setNombre(rs.getString("nombre"));
+                cliente.setIdCliente(rs.getInt("idCliente"));
                 cliente.setTelefono(rs.getInt("telefono"));
                 cliente.setIdRutaEnvio(rs.getInt("idRutaEnvio"));
                 cliente.setPuntos(rs.getInt("puntos"));
