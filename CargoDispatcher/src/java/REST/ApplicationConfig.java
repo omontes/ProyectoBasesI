@@ -31,6 +31,7 @@ public class ApplicationConfig extends Application {
      */
     private void addRestResourceClasses(Set<Class<?>> resources) {
         resources.add(REST.ClientesWS.class);
+        resources.add(REST.ContenedorWS.class);
         resources.add(REST.RutasWS.class);
     }
     
