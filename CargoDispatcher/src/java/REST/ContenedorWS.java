@@ -39,7 +39,7 @@ public class ContenedorWS {
     @GET
     @Path("/getContenedores")
     @Produces("application/json")
-    public String getPaquetes() {
+    public String getContenedores() {
         String feeds = null;
         try {
             ContenedorDAOImpl conteneder_dao = new ContenedorDAOImpl();

@@ -33,6 +33,7 @@ public class ApplicationConfig extends Application {
         resources.add(REST.ClientesWS.class);
         resources.add(REST.ContenedorWS.class);
         resources.add(REST.RutasWS.class);
+        resources.add(com.example.filter.CORSFilter.class);
     }
     
 }

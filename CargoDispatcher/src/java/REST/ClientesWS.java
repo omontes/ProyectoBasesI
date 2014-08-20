@@ -71,6 +71,7 @@ public class ClientesWS {
             System.out.println("Llego aqui");
             System.out.println(gson.toJson(feedData));
             feeds = gson.toJson(feedData);
+            
         } catch (Exception e) {
             System.out.println("Exception Error"); //Console 
         }
