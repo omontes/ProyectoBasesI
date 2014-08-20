@@ -34,7 +34,23 @@ public class ClientesWS {
     public ClientesWS() {
     }
 
-   
+    @GET
+    @Path("/verificarCliente/{query}")
+    @Produces("application/json")
+    public String verificarCliente(@PathParam("query") int query) {
+        String feeds = null;
+        try {
+            ClienteDAOImpl cliente_dao = new ClienteDAOImpl();
+            ClienteDTO cliente = new ClienteDTO();
+            cliente.setIdCliente(query);
+            cliente=cliente_dao.verificarCliente(cliente);
+            Gson gson = new Gson();
+            feeds = gson.toJson(cliente.getNombre());
+        } catch (Exception e) {
+            System.out.println("Exception Error"); //Console 
+        }
+        return feeds;
+    }
     @GET
     @Path("/getPaquetes/{query}")
     @Produces("application/json")
