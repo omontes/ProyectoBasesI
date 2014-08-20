@@ -14,5 +14,5 @@ import java.util.ArrayList;
  * @author Carlos
  */
 public interface ContenedorDAO {
-    public ArrayList<ContenedorDTO> getContenedores();
+    public ArrayList<ContenedorDTO> getContenedores() throws Exception;
 }

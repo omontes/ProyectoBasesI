@@ -48,15 +48,15 @@ public class ContenedorDAOImpl extends DAO implements ContenedorDAO{
         return sb.toString();
     }
     
-    public ArrayList<ContenedorDTO> getContenedores(){
-        ArrayList<ContenedorDTO> Contenedores = new ArrayList<>();
+     @Override
+    public ArrayList<ContenedorDTO> getContenedores() throws Exception{
+        ArrayList<ContenedorDTO> Contenedores = new ArrayList<ContenedorDTO>();
         try {
             String ConsultaContenedores= this.leerSQL("/ArchivosSQL/ConsultaContenedores.sql");
-            PreparedStatement stm = conexion.prepareStatement(ConsultaContenedores);
-            ResultSet rs = stm.executeQuery();
+            ResultSet rs = statement.executeQuery(ConsultaContenedores);
             while (rs.next()) {
                 ContenedorDTO contenedor = new ContenedorDTO();
-                contenedor.setIdContenedor(rs.getInt("idContenedor"));
+                contenedor.setIdContenedor(rs.getString("idContenedor"));
                 contenedor.setIdRuta(rs.getInt("idRuta"));
                 contenedor.setPeso_max(rs.getInt("peso_max"));
                 Contenedores.add(contenedor);
@@ -65,13 +65,9 @@ public class ContenedorDAOImpl extends DAO implements ContenedorDAO{
             return Contenedores;
         } catch (Exception e) {
             System.out.println("Error al realizar la consulta de los contenedores");
-            try {
-                throw(e);
-            } catch (Exception ex) {
-                Logger.getLogger(ClienteDAOImpl.class.getName()).log(Level.SEVERE, null, ex);
-            }
+            throw(e);
         }
-        return null;
+        
     }
     
 }
