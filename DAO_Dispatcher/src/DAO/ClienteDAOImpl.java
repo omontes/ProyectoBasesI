@@ -79,5 +79,36 @@ public class ClienteDAOImpl extends DAO implements ClienteDAO {
         return null;
         
     }
+
+    public ArrayList<ClienteDTO> consultarClientes() throws Exception {
+                
+        ArrayList<ClienteDTO> listaClientes = new ArrayList<ClienteDTO>();
+        try {
+            String consultarClientes= this.leerSQL("/ArchivosSQL/ConsultaClientes.sql");
+            ResultSet rs = statement.executeQuery(consultarClientes);
+            while (rs.next()) {
+                ClienteDTO cliente = new ClienteDTO();
+                cliente.setNombre(rs.getString("nombre"));
+                cliente.setTelefono(rs.getInt("telefono"));
+                cliente.setIdRutaEnvio(rs.getInt("idRutaEnvio"));
+                cliente.setPuntos(rs.getInt("puntos"));
+                cliente.setTipo(rs.getString("tipo"));
+                cliente.setNumero_cuenta(rs.getInt("numero_cuenta"));
+                listaClientes.add(cliente);
+            }  
+            statement.close();
+            return listaClientes;
+            
+
+
+        } catch (Exception e) {
+            System.out.println("Error al realizar la consulta de obtener "
+                    + "todos los clientes");
+            throw(e);
+
+        }
+
+    
+    }
     
 }
