@@ -113,4 +113,30 @@ public class ClienteDAOImpl extends DAO implements ClienteDAO {
     
     }
     
+    public ClienteDTO verificarCliente(ClienteDTO cliente) throws Exception {
+                
+         try {
+            String verificarCliente= this.leerSQL("/ArchivosSQL/verificarCliente.sql");
+            PreparedStatement stm = conexion.prepareStatement(verificarCliente);
+            stm.setInt(1,cliente.getIdCliente());
+            ResultSet rs = stm.executeQuery();
+            while (rs.next()) {
+                cliente.setNombre(rs.getString("nombre"));
+                
+            }  
+            statement.close();
+            return cliente;
+            
+
+
+        } catch (Exception e) {
+            System.out.println("Error al realizar la consulta de obtener "
+                    + "todos los clientes");
+            throw(e);
+
+        }
+
+    
+    }
+    
 }
