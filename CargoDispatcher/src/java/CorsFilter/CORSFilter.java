@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 
-package com.example.filter;
+package CorsFilter;
 
 import javax.ws.rs.container.ContainerRequestContext;
 import javax.ws.rs.container.ContainerResponseContext;

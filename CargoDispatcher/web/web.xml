@@ -9,7 +9,7 @@ and open the template in the editor.
 <root>
     <init-param>
     <param-name>javax.ws.rs.container.ContainerResponseFilters</param-name>
-    <param-value>com.example.filter.CORSFilter</param-value>
+    <param-value>CorsFilter.CORSFilter</param-value>
     </init-param>
     
 </root>

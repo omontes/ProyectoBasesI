@@ -30,10 +30,10 @@ public class ApplicationConfig extends Application {
      * If required, comment out calling this method in getClasses().
      */
     private void addRestResourceClasses(Set<Class<?>> resources) {
+        resources.add(CorsFilter.CORSFilter.class);
         resources.add(REST.ClientesWS.class);
         resources.add(REST.ContenedorWS.class);
         resources.add(REST.RutasWS.class);
-        resources.add(com.example.filter.CORSFilter.class);
     }
     
 }
