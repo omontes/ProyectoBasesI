@@ -11,7 +11,7 @@ package DTO;
  * @author Oscar Montes
  */
 public class ContenedorDTO {
-     private int idContenedor;
+     private String idContenedor;
      private int idRuta;
      private int peso_max;
      private int peso_actual;
@@ -19,16 +19,7 @@ public class ContenedorDTO {
     /**
      * @return the idContenedor
      */
-    public int getIdContenedor() {
-        return idContenedor;
-    }
-
-    /**
-     * @param idContenedor the idContenedor to set
-     */
-    public void setIdContenedor(int idContenedor) {
-        this.idContenedor = idContenedor;
-    }
+   
 
     /**
      * @return the idRuta
@@ -70,6 +61,20 @@ public class ContenedorDTO {
      */
     public void setPeso_actual(int peso_actual) {
         this.peso_actual = peso_actual;
+    }
+
+    /**
+     * @return the idContenedor
+     */
+    public String getIdContenedor() {
+        return idContenedor;
+    }
+
+    /**
+     * @param idContenedor the idContenedor to set
+     */
+    public void setIdContenedor(String idContenedor) {
+        this.idContenedor = idContenedor;
     }
 
 }
