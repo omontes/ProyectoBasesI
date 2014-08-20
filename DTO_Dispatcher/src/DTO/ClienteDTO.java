@@ -14,11 +14,11 @@ public class ClienteDTO {
     
      private int idCliente;
      private int numero_cuenta;
-     private int tipo_cliente;
      private int puntos;
      private String nombre;
+     private String tipo;
      private int telefono;
-
+     private int idRutaEnvio;
     /**
      * @return the idClienteDTO
      */
@@ -47,20 +47,7 @@ public class ClienteDTO {
         this.numero_cuenta = numero_cuenta;
     }
 
-    /**
-     * @return the tipo_cliente
-     */
-    public int getTipo_cliente() {
-        return tipo_cliente;
-    }
-
-    /**
-     * @param tipo_cliente the tipo_cliente to set
-     */
-    public void setTipo_cliente(int tipo_cliente) {
-        this.tipo_cliente = tipo_cliente;
-    }
-
+ 
     /**
      * @return the puntos
      */
@@ -101,6 +88,34 @@ public class ClienteDTO {
      */
     public void setTelefono(int telefono) {
         this.telefono = telefono;
+    }
+
+    /**
+     * @return the tipo
+     */
+    public String getTipo() {
+        return tipo;
+    }
+
+    /**
+     * @param tipo the tipo to set
+     */
+    public void setTipo(String tipo) {
+        this.tipo = tipo;
+    }
+
+    /**
+     * @return the idRutaEnvio
+     */
+    public int getIdRutaEnvio() {
+        return idRutaEnvio;
+    }
+
+    /**
+     * @param idRutaEnvio the idRutaEnvio to set
+     */
+    public void setIdRutaEnvio(int idRutaEnvio) {
+        this.idRutaEnvio = idRutaEnvio;
     }
     
 }

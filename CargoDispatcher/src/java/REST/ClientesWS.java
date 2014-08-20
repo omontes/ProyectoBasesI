@@ -7,6 +7,7 @@
 package REST;
 
 import DAO.ClienteDAOImpl;
+import DTO.ClienteDTO;
 import DTO.PaqueteDTO;
 import com.google.gson.Gson;
 import java.util.ArrayList;
@@ -56,6 +57,25 @@ public class ClientesWS {
      * @param content representation for the resource
      * @return an HTTP response with content of the updated or created resource.
      */
+    
+    @GET
+    @Path("/getClientes")
+    @Produces("application/json")
+    public String getClientes() {
+        String feeds = null;
+        try {
+            ClienteDAOImpl cliente_dao = new ClienteDAOImpl();
+            ArrayList<ClienteDTO> feedData = null;
+            feedData=cliente_dao.consultarClientes();
+            Gson gson = new Gson();
+            System.out.println("Llego aqui");
+            System.out.println(gson.toJson(feedData));
+            feeds = gson.toJson(feedData);
+        } catch (Exception e) {
+            System.out.println("Exception Error"); //Console 
+        }
+        return feeds;
+    }
     @PUT
     @Consumes("application/xml")
     public void putXml(String content) {

@@ -47,6 +47,12 @@ public class RutaEnvioDAO extends DAO {
                 RutaEnvioDTO rutaEnvio = new RutaEnvioDTO();
                 rutaEnvio.setNombre(rs.getString("nombre"));
                 rutaEnvio.setIdRutaEnvio(rs.getInt("idRutaEnvio"));
+                rutaEnvio.setPto_llegada(rs.getString("pto_llegada"));
+                rutaEnvio.setPto_salida(rs.getString("pto_salida"));
+                rutaEnvio.setTiempo_dias(rs.getInt("tiempo"));
+                rutaEnvio.setCosto(rs.getBigDecimal("costo"));
+                rutaEnvio.setMaximocontenedor(rs.getInt("maximocontenedor"));
+                
                 lsitaRutas.add(rutaEnvio);
             }  
             statement.close();
