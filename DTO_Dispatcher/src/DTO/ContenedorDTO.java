@@ -15,7 +15,6 @@ public class ContenedorDTO {
      private int idRuta;
      private int peso_max;
      private int peso_actual;
-     private int estado;
 
     /**
      * @return the idContenedor
@@ -73,17 +72,4 @@ public class ContenedorDTO {
         this.peso_actual = peso_actual;
     }
 
-    /**
-     * @return the estado
-     */
-    public int getEstado() {
-        return estado;
-    }
-
-    /**
-     * @param estado the estado to set
-     */
-    public void setEstado(int estado) {
-        this.estado = estado;
-    }
 }
