@@ -6,9 +6,8 @@
 
 package DAO;
 
-import DTO.ClienteDTO;
-import DTO.PaqueteDTO;
-import InterfaceDAO.ClienteDAO;
+import DTO.ContenedorDTO;
+import InterfaceDAO.ContenedorDAO;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
@@ -29,11 +28,9 @@ import javax.sql.DataSource;
  *
  * @author Carlos
  */
-public class ClienteDAOImpl extends DAO implements ClienteDAO {
+public class ContenedorDAOImpl extends DAO implements ContenedorDAO{
     
-  
-
-    public ClienteDAOImpl() throws SQLException, NamingException {
+     public ContenedorDAOImpl() throws SQLException, NamingException {
         
     }
 
@@ -50,26 +47,24 @@ public class ClienteDAOImpl extends DAO implements ClienteDAO {
         }
         return sb.toString();
     }
-
-    @Override
-    public ArrayList<PaqueteDTO> findAllPaquetes(String cliente) {
-        ArrayList<PaqueteDTO> Paquetes = new ArrayList<PaqueteDTO>();
+    
+    public ArrayList<ContenedorDTO> getContenedores(){
+        ArrayList<ContenedorDTO> Contenedores = new ArrayList<>();
         try {
-            String consularPaquetes_Cliente= this.leerSQL("/ArchivosSQL/ConsultaPaquetes_Cliente.sql");
-            PreparedStatement stm = conexion.prepareStatement(consularPaquetes_Cliente);
-            stm.setString(1,cliente);
+            String ConsultaContenedores= this.leerSQL("/ArchivosSQL/ConsultaContenedores.sql");
+            PreparedStatement stm = conexion.prepareStatement(ConsultaContenedores);
             ResultSet rs = stm.executeQuery();
             while (rs.next()) {
-                PaqueteDTO paquete = new PaqueteDTO();
-                paquete.setIdPaquete(rs.getInt("idPaquete"));
-                paquete.setDescripcion(rs.getString("descripcion"));
-                paquete.setEstadoActual(rs.getString("EstadoActual"));
-                Paquetes.add(paquete);
+                ContenedorDTO contenedor = new ContenedorDTO();
+                contenedor.setIdContenedor(rs.getInt("idContenedor"));
+                contenedor.setIdRuta(rs.getInt("idRuta"));
+                contenedor.setPeso_max(rs.getInt("peso_max"));
+                Contenedores.add(contenedor);
             }  
             statement.close();
-            return Paquetes;
+            return Contenedores;
         } catch (Exception e) {
-            System.out.println("Error al realizar la consulta de clientes");
+            System.out.println("Error al realizar la consulta de los contenedores");
             try {
                 throw(e);
             } catch (Exception ex) {
@@ -77,7 +72,6 @@ public class ClienteDAOImpl extends DAO implements ClienteDAO {
             }
         }
         return null;
-        
     }
     
 }
