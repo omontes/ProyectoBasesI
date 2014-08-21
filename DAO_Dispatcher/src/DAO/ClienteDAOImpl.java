@@ -109,6 +109,9 @@ public class ClienteDAOImpl extends DAO implements ClienteDAO {
             throw(e);
 
         }
+       finally {
+            this.cerrarConexion();
+        }
 
     
     }
@@ -139,16 +142,16 @@ public class ClienteDAOImpl extends DAO implements ClienteDAO {
     
     }
      public int obtenerTipoCliente(ClienteDTO cliente) throws Exception {
-         int idTipo = 0;       
+         int idTipo = 0;    
          try {
             String obtenerTipoCliente= this.leerSQL("/ArchivosSQL/obtenerTipoCliente.sql");
             PreparedStatement stm = conexion.prepareStatement(obtenerTipoCliente);
-            stm.setInt(1,cliente.getIdCliente());
+            stm.setString(1,cliente.getTipo());
             ResultSet rs = stm.executeQuery();
             while (rs.next()) {
-                idTipo=rs.getInt("tipo_cliente");
+                idTipo=rs.getInt("tipo");
                 
-            }  
+            }
             statement.close();
             return idTipo;
             
@@ -165,12 +168,13 @@ public class ClienteDAOImpl extends DAO implements ClienteDAO {
     }
 
 
-    public ClienteDTO create(ClienteDTO cliente) {
+    public ClienteDTO crearCliente(ClienteDTO cliente) throws SQLException {
+        
         try {
             
-            String verificarCliente= this.leerSQL("/ArchivosSQL/insertarCliente.sql");
+            String insertarCliente= this.leerSQL("/ArchivosSQL/insertarCliente.sql");
             int tipocliente= this.obtenerTipoCliente(cliente);
-            PreparedStatement ps = conexion.prepareStatement(verificarCliente);
+            PreparedStatement ps = conexion.prepareStatement(insertarCliente);
             ps.setInt(1, cliente.getIdCliente());
             ps.setInt(2, cliente.getNumero_cuenta());
             ps.setString(3, cliente.getNombre());
@@ -179,16 +183,15 @@ public class ClienteDAOImpl extends DAO implements ClienteDAO {
             ps.setInt(6, cliente.getPuntos());
             ps.setInt(7, tipocliente);
             ps.executeUpdate();
-            ResultSet rs = ps.getGeneratedKeys();
-            rs.next();
-            // Update the id in the returned object. This is important as this value must be returned to the client.
-            int id = rs.getInt(1);
+            
+            
             ps.close();
-            cliente.setIdCliente(id);
         } catch (Exception e) {
             e.printStackTrace();
             throw new RuntimeException(e);
-		} 
+	       } finally {
+            this.cerrarConexion();
+        }
         return cliente;
     }
 

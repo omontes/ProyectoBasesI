@@ -75,7 +75,7 @@ public class ClientesWS {
     /**
      * PUT method for updating or creating an instance of ClientesWS
      * @param content representation for the resource
-     * @return an HTTP response with content of the updated or created resource.
+     * @return an HTTP response with content of the updated or crearCliented resource.
      */
     
     @GET
@@ -103,7 +103,7 @@ public class ClientesWS {
     @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
     public ClienteDTO create(ClienteDTO cliente) throws SQLException, NamingException {
         ClienteDAOImpl cliente_dao = new ClienteDAOImpl();
-        return cliente_dao.create(cliente);
+        return cliente_dao.crearCliente(cliente);
     }
     @PUT
     @Consumes("application/xml")
