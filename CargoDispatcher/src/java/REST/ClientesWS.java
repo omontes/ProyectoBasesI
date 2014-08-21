@@ -10,6 +10,7 @@ import DAO.ClienteDAOImpl;
 import DTO.ClienteDTO;
 import DTO.PaqueteDTO;
 import com.google.gson.Gson;
+import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import javax.naming.NamingException;
@@ -104,6 +105,15 @@ public class ClientesWS {
     public ClienteDTO create(ClienteDTO cliente) throws SQLException, NamingException {
         ClienteDAOImpl cliente_dao = new ClienteDAOImpl();
         return cliente_dao.crearCliente(cliente);
+    }
+    
+    @POST
+    @Path("/update")
+    @Consumes({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
+    @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
+    public ClienteDTO update(ClienteDTO cliente) throws SQLException, NamingException {
+        ClienteDAOImpl cliente_dao = new ClienteDAOImpl();
+        return cliente_dao.actualizarCliente(cliente);
     }
     @PUT
     @Consumes("application/xml")
