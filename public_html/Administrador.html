@@ -25,11 +25,14 @@
         <!-- Metodos de la pagina actual-->
         <script>
             $(document).ready(function() {
+                $("#delete-value").hide();
                 getClientes();
                 getRutas();
                 getContenedores();
+                
                 $(".cli-add").click(function() {
                     $("#edit-cliente #Heading").html("Agregar Cliente");
+                    $("#edit-cliente #cedula").prop('disabled', false);
                     $("#edit-cliente #cedula").val("");
                     $("#edit-cliente #cuenta").val("");
                     $("#edit-cliente #nombre").val("");
@@ -37,9 +40,12 @@
                     $("#edit-cliente #ruta").val("");
                     $("#edit-cliente #puntos").val("");
                     $("#edit-cliente #tipo").val("");
+                    $("#edit-cliente .btn-cli-post").show();
+                    $("#edit-cliente .btn-cli-update").hide();
                 });
                 $('body').on('click', '.cli-edit', function() {
                     $("#edit-cliente #Heading").html("Editar Cliente");
+                    $("#edit-cliente #cedula").prop('disabled', true);
                     $("#edit-cliente #cedula").val($(this).parents("tr").children("#campo-cedula").html());
                     $("#edit-cliente #cuenta").val($(this).parents("tr").children("#campo-cuenta").html());
                     $("#edit-cliente #nombre").val($(this).parents("tr").children("#campo-nombre").html());
@@ -47,15 +53,28 @@
                     $("#edit-cliente #ruta").val($(this).parents("tr").children("#campo-ruta").html());
                     $("#edit-cliente #puntos").val($(this).parents("tr").children("#campo-puntos").html());
                     $("#edit-cliente #tipo").val($(this).parents("tr").children("#campo-tipo").html());
+                    $("#edit-cliente .btn-cli-post").hide();
+                    $("#edit-cliente .btn-cli-update").show();
                 });
                 $(".btn-cli-post").click(function() {
                     $('#edit-cliente').modal('hide');
-                    alert(clienteToJSON());
-                    //postCliente();
-                    //getClientes();
+                    postCliente();
                 });
+                $(".btn-cli-update").click(function() {
+                    $('#edit-cliente').modal('hide');
+                    updateCliente();
+                });
+                $('body').on('click', '.cli-delete', function() {
+                    $("#delete-value").val($(this).parents("tr").children("#campo-cedula").html());
+                });
+                $(".btn-cli-delete").click(function() {
+                    $('#delete-cliente').modal('hide');
+                    deleteCliente();
+                });
+                
                 $(".rut-add").click(function() {
                     $("#edit-ruta #Heading").html("Agregar Ruta");
+                    $("#edit-cliente #cedula").prop('disabled', false);
                     $("#edit-ruta #numero").val("");
                     $("#edit-ruta #nombre").val("");
                     $("#edit-ruta #salida").val("");
@@ -63,9 +82,12 @@
                     $("#edit-ruta #tiempo").val("");
                     $("#edit-ruta #costo").val("");
                     $("#edit-ruta #contenedores").val("");
+                    $("#edit-ruta .btn-rut-post").show();
+                    $("#edit-ruta .btn-rut-update").hide();
                 });
                 $('body').on('click', '.rut-edit', function() {
                     $("#edit-ruta #Heading").html("Editar Ruta");
+                    $("#edit-ruta #cedula").prop('disabled', true);
                     $("#edit-ruta #numero").val($(this).parents("tr").children("#campo-numero").html());
                     $("#edit-ruta #nombre").val($(this).parents("tr").children("#campo-nombre").html());
                     $("#edit-ruta #salida").val($(this).parents("tr").children("#campo-salida").html());
@@ -73,35 +95,63 @@
                     $("#edit-ruta #tiempo").val($(this).parents("tr").children("#campo-tiempo").html());
                     $("#edit-ruta #costo").val($(this).parents("tr").children("#campo-costo").html());
                     $("#edit-ruta #contenedores").val($(this).parents("tr").children("#campo-contenedores").html());
+                    $("#edit-ruta .btn-rut-post").hide();
+                    $("#edit-ruta .btn-rut-update").show();
                 });
                 $(".btn-rut-post").click(function() {
                     $('#edit-ruta').modal('hide');
-                    alert(rutaToJSON());
-                    //postCliente();
-                    //getClientes();
+                    postRuta();
                 });
-                $('body').on('click', '.con-edit', function() {
-                    $("#edit-contenedor #Heading").html("Agregar Ruta");
+                $(".btn-rut-update").click(function() {
+                    $('#edit-ruta').modal('hide');
+                    updateRuta();
+                });
+                $('body').on('click', '.rut-delete', function() {
+                    $("#delete-value").val($(this).parents("tr").children("#campo-numero").html());
+                });
+                $(".btn-rut-delete").click(function() {
+                    $('#delete-ruta').modal('hide');
+                    deleteRuta();
+                });
+                
+                $(".con-add").click(function() {
+                    $("#edit-contenedor #Heading").html("Agregar Contenedor");
+                    $("#edit-cliente #cedula").prop('disabled', false);
                     $("#edit-contenedor #numero").val("");
                     $("#edit-contenedor #ruta").val("");
                     $("#edit-contenedor #peso").val("");
+                    $("#edit-contenedor .btn-con-post").show();
+                    $("#edit-contenedor .btn-con-update").hide();
                 });
-                $(".con-edit").click(function() {
-                    $("#edit-contenedor #Heading").html("Editar Ruta");
+                $('body').on('click', '.con-edit', function() {
+                    $("#edit-contenedor #Heading").html("Editar Contenedor");
+                    $("#edit-contenedor #cedula").prop('disabled', true);
                     $("#edit-contenedor #numero").val($(this).parents("tr").children("#campo-numero").html());
                     $("#edit-contenedor #ruta").val($(this).parents("tr").children("#campo-ruta").html());
                     $("#edit-contenedor #peso").val($(this).parents("tr").children("#campo-peso").html());
+                    $("#edit-contenedor .btn-con-post").hide();
+                    $("#edit-contenedor .btn-con-update").show();
                 });
                 $(".btn-con-post").click(function() {
                     $('#edit-contenedor').modal('hide');
-                    alert(contenedorToJSON());
-                    //postCliente();
-                    //getClientes();
+                    postContenedor();
+                });
+                $(".btn-con-update").click(function() {
+                    $('#edit-contenedor').modal('hide');
+                    updateContenedor();
+                });
+                $('body').on('click', '.con-delete', function() {
+                    $("#delete-value").val($(this).parents("tr").children("#campo-numero").html());
+                });
+                $(".btn-con-delete").click(function() {
+                    $('#delete-contenedor').modal('hide');
+                    deleteContenedor();
                 });
             });
         </script>
     </head>
     <body>
+        <input id="delete-value" type="text" class="form-control">
         <div class="bs-header" id="content">
             <div class="container">
                 <h1>CargoDispatcher - Administrador</h1>
@@ -120,7 +170,7 @@
                                     <i class="glyphicon glyphicon-search"></i>
                                 </span>
                                 <span class="clickable cli-add" title="Agregar Cliente" data-container="body"  data-toggle="modal" data-target="#edit-cliente" data-placement="top">
-                                    <i class="glyphicon glyphicon-user"></i>
+                                    <i class="glyphicon glyphicon-plus-sign"></i>
                                 </span>
                             </div>
                         </div>
@@ -151,7 +201,7 @@
                                     <td id="campo-puntos">0</td>
                                     <td id="campo-tipo">bronce</td>
                                     <td><p><button class="btn btn-primary btn-xs cli-edit" data-title="Edit-cliente" data-toggle="modal" data-target="#edit-cliente" data-placement="top" rel="tooltip"><span class="glyphicon glyphicon-pencil"></span></button></p></td>
-                                    <td><p><button class="btn btn-danger btn-xs" onclick="alert(hola);" data-title="Delete" data-toggle="modal" data-target="#delete" data-placement="top" rel="tooltip"><span class="glyphicon glyphicon-trash"></span></button></p></td>
+                                    <td><p><button class="btn btn-danger btn-xs cli-delete" data-title="Delete-cliente" data-toggle="modal" data-target="#delete-cliente" data-placement="top" rel="tooltip"><span class="glyphicon glyphicon-trash"></span></button></p></td>
                                 </tr>
                                 <tr>
                                     <td id="campo-cedula">167867253</td>
@@ -162,7 +212,7 @@
                                     <td id="campo-puntos">0</td>
                                     <td id="campo-tipo">bronce</td>
                                     <td><p><button class="btn btn-primary btn-xs cli-edit" data-title="Edit-cliente" data-toggle="modal" data-target="#edit-cliente" data-placement="top" rel="tooltip"><span class="glyphicon glyphicon-pencil"></span></button></p></td>
-                                    <td><p><button class="btn btn-danger btn-xs" data-title="Delete" data-toggle="modal" data-target="#delete" data-placement="top" rel="tooltip"><span class="glyphicon glyphicon-trash"></span></button></p></td>
+                                    <td><p><button class="btn btn-danger btn-xs cli-delete" data-title="Delete-cliente" data-toggle="modal" data-target="#delete-cliente" data-placement="top" rel="tooltip"><span class="glyphicon glyphicon-trash"></span></button></p></td>
                                 </tr>
                             </tbody>
                         </table>
@@ -170,6 +220,7 @@
                 </div>
             </div>
         </div>
+        
         <div class="modal fade" id="edit-cliente" tabindex="-1" role="dialog" aria-labelledby="edit" aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
@@ -203,14 +254,15 @@
                             <input id="ruta" type="text" placeholder="ID de Ruta" class="form-control">
                         </div>
                         <div>
-                            <input id="puntos" type="text" placeholder="Puntos" class="form-control">
+                            <input id="puntos" type="text" placeholder="Puntos" class="form-control" disabled>
                         </div>
                         <div>
-                            <input id="tipo" type="text" placeholder="Tipo de Cuenta" class="form-control">
+                            <input id="tipo" type="text" placeholder="Tipo de Cuenta" class="form-control" disabled>
                         </div>
                     </div>
                     <div class="modal-footer ">
-                        <button type="button" class="btn btn-warning btn-lg btn-cli-post" style="width: 100%;"><span class="glyphicon glyphicon-ok-sign"></span> Update</button>
+                        <button type="button" class="btn btn-warning btn-lg btn-cli-post" style="width: 100%;"><span class="glyphicon glyphicon-ok-sign"></span> Agregar</button>
+                        <button type="button" class="btn btn-warning btn-lg btn-cli-update" style="width: 100%;"><span class="glyphicon glyphicon-ok-sign"></span> Update</button>
                     </div>
                 </div>
                 <!-- /.modal-content --> 
@@ -218,6 +270,26 @@
             <!-- /.modal-dialog --> 
         </div>
 
+        <!--modal delete-->
+        <div class="modal fade" id="delete-cliente" tabindex="-1" role="dialog" aria-labelledby="edit" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                        <h4 class="modal-title custom_align" id="Heading">Borrar Esta Entrada</h4>
+                    </div>
+                    <div class="modal-body">
+                        <div class="alert alert-warning"><span class="glyphicon glyphicon-warning-sign"></span> Seguro que desea eliminar este cliente?</div>
+                    </div>
+                    <div class="modal-footer ">
+                        <button type="button" class="btn btn-warning btn-cli-delete" ><span class="glyphicon glyphicon-ok-sign"></span> Si</button>
+                        <button type="button" class="btn btn-warning" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span> No</button>
+                    </div>
+                </div>
+                <!-- /.modal-content --> 
+            </div>
+            <!-- /.modal-dialog --> 
+        </div>
 
         <!-- Tabla Rutas-->
         <div class="container">
@@ -231,7 +303,7 @@
                                     <i class="glyphicon glyphicon-search"></i>
                                 </span>
                                 <span class="clickable rut-add" title="Agregar Ruta" data-container="body"  data-toggle="modal" data-target="#edit-ruta" data-placement="top">
-                                    <i class="glyphicon glyphicon-user"></i>
+                                    <i class="glyphicon glyphicon-plus-sign"></i>
                                 </span>
                             </div>
                         </div>
@@ -262,7 +334,7 @@
                                     <td id="campo-costo">500</th>
                                     <td id="campo-contenedores">20</th>
                                     <td><p><button class="btn btn-primary btn-xs rut-edit" data-title="Edit-ruta" data-toggle="modal" data-target="#edit-ruta" data-placement="top" rel="tooltip"><span class="glyphicon glyphicon-pencil"></span></button></p></td>
-                                    <td><p><button class="btn btn-danger btn-xs" data-title="Delete" data-toggle="modal" data-target="#delete" data-placement="top" rel="tooltip"><span class="glyphicon glyphicon-trash"></span></button></p></td>
+                                    <td><p><button class="btn btn-danger btn-xs rut-delete" data-title="Delete-ruta" data-toggle="modal" data-target="#delete-ruta" data-placement="top" rel="tooltip"><span class="glyphicon glyphicon-trash"></span></button></p></td>
                                 </tr>
                             </tbody>
                         </table>
@@ -301,7 +373,8 @@
                         </div>
                     </div>
                     <div class="modal-footer ">
-                        <button type="button" class="btn btn-warning btn-lg btn-rut-post" style="width: 100%;"><span class="glyphicon glyphicon-ok-sign"></span> Update</button>
+                        <button type="button" class="btn btn-warning btn-lg btn-rut-post" style="width: 100%;"><span class="glyphicon glyphicon-ok-sign"></span> Agregar</button>
+                        <button type="button" class="btn btn-warning btn-lg btn-rut-update" style="width: 100%;"><span class="glyphicon glyphicon-ok-sign"></span> Update</button>
                     </div>
                 </div>
                 <!-- /.modal-content --> 
@@ -309,6 +382,26 @@
             <!-- /.modal-dialog --> 
         </div>
 
+                <!--modal delete-->
+        <div class="modal fade" id="delete-ruta" tabindex="-1" role="dialog" aria-labelledby="edit" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                        <h4 class="modal-title custom_align" id="Heading">Borrar Esta Entrada</h4>
+                    </div>
+                    <div class="modal-body">
+                        <div class="alert alert-warning"><span class="glyphicon glyphicon-warning-sign"></span> Seguro que desea eliminar esta ruta?</div>
+                    </div>
+                    <div class="modal-footer ">
+                        <button type="button" class="btn btn-warning btn-rut-delete" ><span class="glyphicon glyphicon-ok-sign"></span> Si</button>
+                        <button type="button" class="btn btn-warning" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span> No</button>
+                    </div>
+                </div>
+                <!-- /.modal-content --> 
+            </div>
+            <!-- /.modal-dialog --> 
+        </div>
 
         <!-- Tabla Contenedores-->
         <div class="container">
@@ -322,7 +415,7 @@
                                     <i class="glyphicon glyphicon-search"></i>
                                 </span>
                                 <span class="clickable con-add" title="Agregar Contenedor" data-container="body"  data-toggle="modal" data-target="#edit-contenedor" data-placement="top">
-                                    <i class="glyphicon glyphicon-user"></i>
+                                    <i class="glyphicon glyphicon-plus-sign"></i>
                                 </span>
                             </div>
                         </div>
@@ -341,11 +434,11 @@
                             </thead>
                             <tbody id="con-table-body">
                                 <tr>
-                                    <td id="campo-numero">1</td>
+                                    <td id="campo-numero">101</td>
                                     <td id="campo-ruta">1</td>
                                     <td id="campo-peso">10</td>
                                     <td><p><button class="btn btn-primary btn-xs con-edit" data-title="Edit-contenedor" data-toggle="modal" data-target="#edit-contenedor" data-placement="top" rel="tooltip"><span class="glyphicon glyphicon-pencil"></span></button></p></td>
-                                    <td><p><button class="btn btn-danger btn-xs" data-title="Delete" data-toggle="modal" data-target="#delete" data-placement="top" rel="tooltip"><span class="glyphicon glyphicon-trash"></span></button></p></td>
+                                    <td><p><button class="btn btn-danger btn-xs con-delete" data-title="Delete-contenedor" data-toggle="modal" data-target="#delete-contenedor" data-placement="top" rel="tooltip"><span class="glyphicon glyphicon-trash"></span></button></p></td>
                                 </tr>
                             </tbody>
                         </table>
@@ -374,7 +467,8 @@
                         </div>
                     </div>
                     <div class="modal-footer ">
-                        <button type="button" class="btn btn-warning btn-lg btn-con-post" style="width: 100%;"><span class="glyphicon glyphicon-ok-sign"></span> Update</button>
+                        <button type="button" class="btn btn-warning btn-lg btn-con-post" style="width: 100%;"><span class="glyphicon glyphicon-ok-sign"></span> Agregar</button>
+                        <button type="button" class="btn btn-warning btn-lg btn-con-update" style="width: 100%;"><span class="glyphicon glyphicon-ok-sign"></span> Update</button>
                     </div>
                 </div>
                 <!-- /.modal-content --> 
@@ -382,10 +476,8 @@
             <!-- /.modal-dialog --> 
         </div>
 
-
-
         <!--modal delete-->
-        <div class="modal fade" id="delete" tabindex="-1" role="dialog" aria-labelledby="edit" aria-hidden="true">
+        <div class="modal fade" id="delete-contenedor" tabindex="-1" role="dialog" aria-labelledby="edit" aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -393,12 +485,10 @@
                         <h4 class="modal-title custom_align" id="Heading">Borrar Esta Entrada</h4>
                     </div>
                     <div class="modal-body">
-
-                        <div class="alert alert-warning"><span class="glyphicon glyphicon-warning-sign"></span> Seguro que desea eliminar este registro?</div>
-
+                        <div class="alert alert-warning"><span class="glyphicon glyphicon-warning-sign"></span> Seguro que desea eliminar este contenedor?</div>
                     </div>
                     <div class="modal-footer ">
-                        <button type="button" class="btn btn-warning" ><span class="glyphicon glyphicon-ok-sign"></span> Si</button>
+                        <button type="button" class="btn btn-warning btn-con-delete" ><span class="glyphicon glyphicon-ok-sign"></span> Si</button>
                         <button type="button" class="btn btn-warning" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span> No</button>
                     </div>
                 </div>
@@ -406,6 +496,7 @@
             </div>
             <!-- /.modal-dialog --> 
         </div>
+
 
 
     </body>
