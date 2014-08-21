@@ -4,7 +4,7 @@
         <title>Empleado</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width">
-        
+
         <!-- CSS -->
         <!-- CSS Bootstrap -->
         <link href="css/MyCSS.css" rel="stylesheet" type="text/css">
@@ -23,14 +23,110 @@
         <!-- Metodos Javascript de la interfaz-->
         <script src="js/DesignScripts.js"></script>
         <!-- Metodos de la pagina actual-->
-        <script></script>
+        <script>
+            $(document).ready(function() {
+                //getPaquetesEmpleado();
+                $(".paq-add").click(function() {
+                    $("#edit-paquete #Heading").html("Agregar Cliente");
+                    $("#edit-paquete #numero").val("");
+                    $("#edit-paquete #peso").val("");
+                    $("#edit-paquete #descripcion").val("");
+                    $("#edit-paquete #valor").val("");
+                    $("#edit-paquete #tipo").val("");
+                    $("#edit-paquete #cliente").val("");
+                });
+            });
+        </script>
     </head>
     <body>
-<div class="bs-header" id="content">
+        <div class="bs-header" id="content">
             <div class="container">
                 <h1>CargoDispatcher - Empleado</h1>
             </div>
         </div>
-        
+        <!-- Tabla Clientes-->
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="panel panel-primary">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">Paquetes</h3>
+                            <div class="pull-right">
+                                <span class="clickable filter" data-toggle="tooltip" title="Buscar" data-container="body">
+                                    <i class="glyphicon glyphicon-search"></i>
+                                </span>
+                                <span class="clickable paq-add" title="Agregar Paquetes" data-container="body"  data-toggle="modal" data-target="#edit-paquete" data-placement="top">
+                                    <i class="glyphicon glyphicon-plus-sign"></i>
+                                </span>
+                            </div>
+                        </div>
+                        <div class="panel-body">
+                            <input type="text" class="form-control" id="paq-table-filter" data-action="filter" data-filters="#paq-table" placeholder="Buscar Paquetes" />
+                        </div>
+                        <table class="table table-hover" id="paq-table">
+                            <thead>
+                                <tr>
+                                    <th>ID Paquete</th>
+                                    <th>Peso</th>
+                                    <th>Descripcion</th>
+                                    <th>Valor</th>
+                                    <th>Tipo</th>
+                                    <th>ID Cliente</th>
+                                    <th>Desalmacenar</th>
+                                    <th>Desembalar</th> 
+                                </tr>
+                            </thead>
+                            <tbody id="cli-table-body">
+                                <tr>
+                                    <td id="campo-numero">115260289</td>
+                                    <td id="campo-peso">12345</td>
+                                    <td id="campo-descripcion">Kilgore</td>
+                                    <td id="campo-valor">22350816</td>
+                                    <td id="campo-tipo">Especial</td>
+                                    <td id="campo-cliente">1</td>
+                                    <td><p><button class="btn btn-primary btn-xs desalmacenar" data-title="Desalmacenar" ><span class="glyphicon glyphicon-plane"></span></button></p></td>
+                                    <td><p><button class="btn btn-primary btn-xs desembalar" data-title="Desembalar" ><span class="glyphicon glyphicon-gift"></span></button></p></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal fade" id="edit-paquete" tabindex="-1" role="dialog" aria-labelledby="edit" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                        <h3 class="modal-title custom_align" id="Heading">Agregar Paquete</h3>
+                    </div>
+                    <div class="modal-body">
+                        <div>
+                            <input id="numero" type="text" placeholder="ID del Paquete" class="form-control">
+                        </div>
+                        <div>
+                            <input id="peso" type="text" placeholder="Peso" class="form-control">
+                        </div>
+                        <div>
+                            <input id="descripcion" type="text" placeholder="Descripcion" class="form-control">
+                        </div>
+                        <div>
+                            <input id="valor" type="text" placeholder="Valor" class="form-control">
+                        </div>
+                        <div>
+                            <input id="tipo" type="text" placeholder="Tipo" class="form-control">
+                        </div>
+                        <div>
+                            <input id="cliente" type="text" placeholder="ID del Cliente" class="form-control">
+                        </div>
+                    </div>
+                    <div class="modal-footer ">
+                        <button type="button" class="btn btn-warning btn-lg btn-paq-post" style="width: 100%;"><span class="glyphicon glyphicon-ok-sign"></span> Update</button>
+                    </div>
+                </div>
+                <!-- /.modal-content --> 
+            </div>
+            <!-- /.modal-dialog --> 
+        </div>
     </body>
 </html>

@@ -33,11 +33,27 @@ function postCliente() {
     });
 }
 
-function deleteCliente(idCliente) {
+// UPDATE un cliente
+function updateCliente() {
+    console.log('updateCliente');
+    $.ajax({
+        type: 'POST',
+        contentType: 'application/json',
+        url: rootURL + "cliente/update",
+        dataType: "json",
+        data: clienteToJSON(),
+        success: function() {
+            getClientes();
+        }
+    });
+}
+
+// DELETE un cliente
+function deleteCliente() {
     console.log('deleteCliente');
     $.ajax({
         type: 'DELETE',
-        url: rootURL + 'cliente/' + idCliente
+        url: rootURL + 'cliente/' + $("#delete-value").val()
     });
 }
 
@@ -54,7 +70,7 @@ function getRutas() {
     });
 }
 
-// POST un cliente
+// POST una ruta
 function postRuta() {
     console.log('postRuta');
     $.ajax({
@@ -66,6 +82,30 @@ function postRuta() {
         success: function() {
             getRutas();
         }
+    });
+}
+
+// UPDATE una ruta
+function updateRuta() {
+    console.log('updateRuta');
+    $.ajax({
+        type: 'POST',
+        contentType: 'application/json',
+        url: rootURL + "ruta/update",
+        dataType: "json",
+        data: rutaToJSON(),
+        success: function() {
+            getRutas();
+        }
+    });
+}
+
+// DELETE una ruta
+function deleteRuta() {
+    console.log('deleteRuta');
+    $.ajax({
+        type: 'DELETE',
+        url: rootURL + 'ruta/' + $("#delete-value").val()
     });
 }
 
@@ -82,7 +122,7 @@ function getContenedores() {
     });
 }
 
-// POST un cliente
+// POST un contenedor
 function postContenedor() {
     console.log('postContenedor');
     $.ajax({
@@ -91,8 +131,45 @@ function postContenedor() {
         url: rootURL + "contenedor",
         dataType: "json",
         data: contenedorToJSON(),
-         success: function() {
+        success: function() {
             getContenedores();
+        }
+    });
+}
+
+// UPDATE un contenedor
+function updateContenedor() {
+    console.log('updateContenedor');
+    $.ajax({
+        type: 'POST',
+        contentType: 'application/json',
+        url: rootURL + "contenedor/update",
+        dataType: "json",
+        data: contenedorToJSON(),
+        success: function() {
+            getContenedores();
+        }
+    });
+}
+
+// DELETE un contenedor
+function deleteContenedor() {
+    console.log('deleteContenedor');
+    $.ajax({
+        type: 'DELETE',
+        url: rootURL + 'contenedor/' + $("#delete-value").val()
+    });
+}
+
+// GET todos los paquetes en almacenaje
+function getPaquetesEmpleado() {
+    console.log('getPaquetesEmpleado');
+    $.ajax({
+        type: 'GET',
+        url: rootURL + "paquete/getPaquetesEmpleado",
+        dataType: "json",
+        success: function(data) {
+            renderPaquetesEmpleado(data);
         }
     });
 }
@@ -110,7 +187,7 @@ function renderClientes(data) {
         out += "<td id=\"campo-puntos\">" + data[i].puntos + "</td>";
         out += "<td id=\"campo-tipo\">" + data[i].tipo + "</td>";
         out += "<td><p><button class=\"btn btn-primary btn-xs cli-edit\" data-title=\"Edit-cliente\" data-toggle=\"modal\" data-target=\"#edit-cliente\" data-placement=\"top\" rel=\"tooltip\"><span class=\"glyphicon glyphicon-pencil\"></span></button></p></td>";
-        out += "<td><p><button class=\"btn btn-danger btn-xs\" data-title=\"Delete\" data-toggle=\"modal\" data-target=\"#delete\" data-placement=\"top\" rel=\"tooltip\"><span class=\"glyphicon glyphicon-trash\"></span></button></p></td>";
+        out += "<td><p><button class=\"btn btn-danger btn-xs cli-delete\" data-title=\"Delete-cliente\" data-toggle=\"modal\" data-target=\"#delete-cliente\" data-placement=\"top\" rel=\"tooltip\"><span class=\"glyphicon glyphicon-trash\"></span></button></p></td>";
         out += "</tr>";
     }
     $("#cli-table-body").html(out);
@@ -130,7 +207,7 @@ function renderRutas(data) {
         out += "<td id=\"campo-costo\">" + data[i].costo + "</td>";
         out += "<td id=\"campo-contenedores\">" + data[i].maximocontenedor + "</td>";
         out += "<td><p><button class=\"btn btn-primary btn-xs rut-edit\" data-title=\"Edit-ruta\" data-toggle=\"modal\" data-target=\"#edit-ruta\" data-placement=\"top\" rel=\"tooltip\"><span class=\"glyphicon glyphicon-pencil\"></span></button></p></td>";
-        out += "<td><p><button class=\"btn btn-danger btn-xs\" data-title=\"Delete\" data-toggle=\"modal\" data-target=\"#delete\" data-placement=\"top\" rel=\"tooltip\"><span class=\"glyphicon glyphicon-trash\"></span></button></p></td>";
+        out += "<td><p><button class=\"btn btn-danger btn-xs rut-delete\" data-title=\"Delete-ruta\" data-toggle=\"modal\" data-target=\"#delete-ruta\" data-placement=\"top\" rel=\"tooltip\"><span class=\"glyphicon glyphicon-trash\"></span></button></p></td>";
         out += "</tr>";
     }
     $("#rut-table-body").html(out);
@@ -146,10 +223,33 @@ function renderContenedores(data) {
         out += "<td id=\"campo-ruta\">" + data[i].idRuta + "</td>";
         out += "<td id=\"campo-peso\">" + data[i].peso_max + "</td>";
         out += "<td><p><button class=\"btn btn-primary btn-xs con-edit\" data-title=\"Edit-contenedor\" data-toggle=\"modal\" data-target=\"#edit-contenedor\" data-placement=\"top\" rel=\"tooltip\"><span class=\"glyphicon glyphicon-pencil\"></span></button></p></td>";
-        out += "<td><p><button class=\"btn btn-danger btn-xs\" data-title=\"Delete\" data-toggle=\"modal\" data-target=\"#delete\" data-placement=\"top\" rel=\"tooltip\"><span class=\"glyphicon glyphicon-trash\"></span></button></p></td>";
-out += "</tr>";
+        out += "<td><p><button class=\"btn btn-danger btn-xs con-delete\" data-title=\"Delete-contenedor\" data-toggle=\"modal\" data-target=\"#delete-contenedor\" data-placement=\"top\" rel=\"tooltip\"><span class=\"glyphicon glyphicon-trash\"></span></button></p></td>";
+        out += "</tr>";
     }
     $("#con-table-body").html(out);
+}
+
+function renderPaquetesEmpleado(data) {
+    var i;
+    var out = "";
+    for (i = 0; i < data.length; i++) {
+        out += "<tr>";
+        out += "<td id=\"campo-numero\">" + data[i].idPaquete + "</td>";
+        out += "<td id=\"campo-peso\">" + data[i].peso + "</td>";
+        out += "<td id=\"campo-descripcion\">" + data[i].descripcion + "</td>";
+        out += "<td id=\"campo-valor\">" + data[i].valor + "</td>";
+        out += "<td id=\"campo-tipo\">" + data[i].categoria + "</td>";
+        out += "<td id=\"campo-cliente\">" + data[i].idCliente + "</td>";
+        if(data[i].estado==="2"){
+            out +="<td><p><button class=\"btn btn-primary btn-xs desalmacenar\" data-title=\"Desalmacenar\" ><span class=\"glyphicon glyphicon-plane\"></span></button></p><td>";
+            out +="<td><td>";
+        }
+        if(data[i].estado==="5"){
+            out +="<td><td>";
+            out +="<td><p><button class=\"btn btn-primary btn-xs desembalar\" data-title=\"Desembalar\" ><span class=\"glyphicon glyphicon-gift\"></span></button></p><td>";
+        }
+    }
+    $("#paq-table-body").html(out);
 }
 
 
@@ -162,7 +262,7 @@ function clienteToJSON() {
         "idRutaEnvio": $("#edit-cliente #ruta").val(),
         "puntos": $("#edit-cliente #puntos").val(),
         "tipo": $("#edit-cliente #tipo").val()
-        });
+    });
 }
 
 function rutaToJSON() {
@@ -174,13 +274,13 @@ function rutaToJSON() {
         "tiempo": $("#edit-ruta #tiempo").val(),
         "costo": $("#edit-ruta #costo").val(),
         "maximocontenedor": $("#edit-ruta #contenedores").val()
-        });
+    });
 }
 
 function contenedorToJSON() {
     return JSON.stringify({
         "idContenedor": $("#edit-contenedor #numero").val(),
         "idRuta": $("#edit-contenedor #ruta").val(),
-        "peso_max": $("#edit-contenedor #peso").val(),
-        });
+        "peso_max": $("#edit-contenedor #peso").val()
+    });
 }
