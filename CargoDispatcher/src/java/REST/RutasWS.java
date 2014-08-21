@@ -9,7 +9,9 @@ package REST;
 import DAO.RutaEnvioDAO;
 import DTO.RutaEnvioDTO;
 import com.google.gson.Gson;
+import java.sql.SQLException;
 import java.util.ArrayList;
+import javax.naming.NamingException;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.UriInfo;
 import javax.ws.rs.PathParam;
@@ -17,7 +19,9 @@ import javax.ws.rs.Consumes;
 import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.GET;
+import javax.ws.rs.POST;
 import javax.ws.rs.Produces;
+import javax.ws.rs.core.MediaType;
 
 /**
  * REST Web Service
@@ -57,12 +61,18 @@ public class RutasWS {
         }
         return feeds;
     }
-
+    @POST
+    @Consumes({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
+    @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
+    public RutaEnvioDTO create(RutaEnvioDTO ruta) throws SQLException, NamingException {
+        RutaEnvioDAO ruta_dao = new RutaEnvioDAO();
+        return ruta_dao.crearRuta(ruta);
+    }
 
     /**
      * PUT method for updating or creating an instance of HelloWorld
      * @param content representation for the resource
-     * @return an HTTP response with content of the updated or created resource.
+     * @return an HTTP response with content of the updated or crearRutad resource.
      */
     @PUT
     @Consumes("application/xml")
