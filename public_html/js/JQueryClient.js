@@ -26,7 +26,10 @@ function postCliente() {
         contentType: 'application/json',
         url: rootURL + "cliente",
         dataType: "json",
-        data: clienteToJSON()
+        data: clienteToJSON(),
+        success: function() {
+            getClientes();
+        }
     });
 }
 
@@ -59,7 +62,10 @@ function postRuta() {
         contentType: 'application/json',
         url: rootURL + "ruta",
         dataType: "json",
-        data: rutaToJSON()
+        data: rutaToJSON(),
+        success: function() {
+            getRutas();
+        }
     });
 }
 
@@ -84,7 +90,10 @@ function postContenedor() {
         contentType: 'application/json',
         url: rootURL + "contenedor",
         dataType: "json",
-        data: contenedorToJSON()
+        data: contenedorToJSON(),
+         success: function() {
+            getContenedores();
+        }
     });
 }
 

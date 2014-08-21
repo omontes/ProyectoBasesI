@@ -50,9 +50,8 @@
                 });
                 $(".btn-cli-post").click(function() {
                     $('#edit-cliente').modal('hide');
-                    alert(clienteToJSON());
-                    //postCliente();
-                    //getClientes();
+                    postCliente();
+                    getClientes();
                 });
                 $(".rut-add").click(function() {
                     $("#edit-ruta #Heading").html("Agregar Ruta");
@@ -76,8 +75,8 @@
                 });
                 $(".btn-rut-post").click(function() {
                     $('#edit-ruta').modal('hide');
-                    alert(rutaToJSON());
-                    //postCliente();
+                    
+                    postRuta();
                     //getClientes();
                 });
                 $('body').on('click', '.con-edit', function() {
@@ -94,8 +93,7 @@
                 });
                 $(".btn-con-post").click(function() {
                     $('#edit-contenedor').modal('hide');
-                    alert(contenedorToJSON());
-                    //postCliente();
+                    postContenedor();
                     //getClientes();
                 });
             });
