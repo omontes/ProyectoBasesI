@@ -138,5 +138,60 @@ public class ClienteDAOImpl extends DAO implements ClienteDAO {
 
     
     }
+     public int obtenerTipoCliente(ClienteDTO cliente) throws Exception {
+         int idTipo = 0;       
+         try {
+            String obtenerTipoCliente= this.leerSQL("/ArchivosSQL/obtenerTipoCliente.sql");
+            PreparedStatement stm = conexion.prepareStatement(obtenerTipoCliente);
+            stm.setInt(1,cliente.getIdCliente());
+            ResultSet rs = stm.executeQuery();
+            while (rs.next()) {
+                idTipo=rs.getInt("tipo_cliente");
+                
+            }  
+            statement.close();
+            return idTipo;
+            
+
+
+        } catch (Exception e) {
+            System.out.println("Error al realizar la consulta de obtener "
+                    + "el tipo del cliente");
+            throw(e);
+
+        }
+
+    
+    }
+
+
+    public ClienteDTO create(ClienteDTO cliente) {
+        try {
+            
+            String verificarCliente= this.leerSQL("/ArchivosSQL/insertarCliente.sql");
+            int tipocliente= this.obtenerTipoCliente(cliente);
+            PreparedStatement ps = conexion.prepareStatement(verificarCliente);
+            ps.setInt(1, cliente.getIdCliente());
+            ps.setInt(2, cliente.getNumero_cuenta());
+            ps.setString(3, cliente.getNombre());
+            ps.setInt(4, cliente.getTelefono());
+            ps.setInt(5, cliente.getIdRutaEnvio());
+            ps.setInt(6, cliente.getPuntos());
+            ps.setInt(7, tipocliente);
+            ps.executeUpdate();
+            ResultSet rs = ps.getGeneratedKeys();
+            rs.next();
+            // Update the id in the returned object. This is important as this value must be returned to the client.
+            int id = rs.getInt(1);
+            ps.close();
+            cliente.setIdCliente(id);
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw new RuntimeException(e);
+		} 
+        return cliente;
+    }
+
+ 
     
 }
