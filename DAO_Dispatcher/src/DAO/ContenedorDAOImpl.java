@@ -73,4 +73,26 @@ public class ContenedorDAOImpl extends DAO implements ContenedorDAO{
 
     }
 
+    public ContenedorDTO crearContenedor(ContenedorDTO contenedor) throws SQLException {
+
+        try {
+
+            String insertarContenedor = this.leerSQL("/ArchivosSQL/insertarContenedor.sql");
+            PreparedStatement ps = conexion.prepareStatement(insertarContenedor);
+            ps.setString(1, contenedor.getIdContenedor());
+            ps.setInt(2, contenedor.getIdRuta());
+            ps.setInt(3, contenedor.getPeso_max());
+            ps.executeUpdate();
+            ps.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw new RuntimeException(e);
+        } finally {
+            this.cerrarConexion();
+        }
+        return contenedor;
+    }
+
+    
+
 }
