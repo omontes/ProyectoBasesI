@@ -1,2 +1,2 @@
-INSERT INTO contenedor(idRuta,idContenedor,peso_max)
+INSERT INTO contenedor(idContenedor,idRuta,peso_max)
 VALUES(?,?,?);
