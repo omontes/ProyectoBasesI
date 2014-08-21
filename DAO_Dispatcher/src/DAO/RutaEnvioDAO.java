@@ -12,6 +12,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -65,6 +66,9 @@ public class RutaEnvioDAO extends DAO {
             throw(e);
 
         }
+       finally {
+            this.cerrarConexion();
+        }
 
     }
     
@@ -87,4 +91,61 @@ public class RutaEnvioDAO extends DAO {
         }
         return sb.toString();
     }
+      /**"campo-idrutaEnvio"  
+      "campo-nombre"
+      "campo-salida" 
+      "campo-llegada"
+      "campo-tiempo" 
+      "campo-costo"
+      "campo-maximocontenedores"***/
+    public RutaEnvioDTO crearRuta(RutaEnvioDTO ruta) throws SQLException {
+       try {
+            
+            String insertarRuta= this.leerSQL("/ArchivosSQL/insertarRuta.sql");
+            int direccion= this.obtenerDireccionRuta(ruta);
+            PreparedStatement ps = conexion.prepareStatement(insertarRuta);
+            ps.setInt(1, ruta.getIdRutaEnvio());
+            ps.setString(2, ruta.getNombre());
+            ps.setInt(3, direccion);
+            ps.setInt(4, ruta.getTiempo_dias());
+            ps.setBigDecimal(5, ruta.getCosto());
+            ps.setInt(6, ruta.getMaximocontenedor());
+            ps.executeUpdate();
+            
+            
+            ps.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw new RuntimeException(e);
+	       } finally {
+            this.cerrarConexion();
+        }
+        return ruta;
+    }
+
+    private int obtenerDireccionRuta(RutaEnvioDTO ruta) throws Exception {
+         int idRuta = 0;    
+         try {
+            String obtenerDireccionRuta= this.leerSQL("/ArchivosSQL/obtenerDireccionRuta.sql");
+            PreparedStatement stm = conexion.prepareStatement(obtenerDireccionRuta);
+            stm.setString(1,ruta.getPto_llegada());
+            stm.setString(2,ruta.getPto_salida());
+            ResultSet rs = stm.executeQuery();
+            while (rs.next()) {
+                idRuta=rs.getInt("idRuta");
+                
+            }
+            statement.close();
+            return idRuta;
+            
+
+
+        } catch (Exception e) {
+            System.out.println("Error al realizar la consulta de obtener "
+                    + "el tipo del cliente");
+            throw(e);
+
+        }
+    }
+    
 }

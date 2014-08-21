@@ -31,7 +31,26 @@ public class DAO {
         this.statement=con.createStatement();
 
     }
+    public void cerrarConexion() throws SQLException{
+        conexion.close();
+        statement.close();
+    }
+    public Connection getConexion() throws NamingException, SQLException{
+        InitialContext ctx = new InitialContext();
+        DataSource ds = (DataSource) ctx.lookup("jdbc/cargodispatcher");
+        Connection con = ds.getConnection();
+        this.conexion=con;
+        return conexion;
+        
+    }
 
-    
+    public Statement getStatement() throws NamingException, SQLException{
+        InitialContext ctx = new InitialContext();
+        DataSource ds = (DataSource) ctx.lookup("jdbc/cargodispatcher");
+        Connection con = ds.getConnection();
+        this.conexion=con;
+        this.statement=con.createStatement();
+        return statement;
+    }
     
 }

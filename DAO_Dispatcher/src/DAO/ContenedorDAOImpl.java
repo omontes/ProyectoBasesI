@@ -67,7 +67,10 @@ public class ContenedorDAOImpl extends DAO implements ContenedorDAO{
             System.out.println("Error al realizar la consulta de los contenedores");
             throw(e);
         }
-        
+      finally {
+            this.cerrarConexion();
+        }
+
     }
-    
+
 }
