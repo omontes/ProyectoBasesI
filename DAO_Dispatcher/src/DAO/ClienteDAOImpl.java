@@ -173,15 +173,12 @@ public class ClienteDAOImpl extends DAO implements ClienteDAO {
         try {
             
             String insertarCliente= this.leerSQL("/ArchivosSQL/insertarCliente.sql");
-            int tipocliente= this.obtenerTipoCliente(cliente);
             PreparedStatement ps = conexion.prepareStatement(insertarCliente);
             ps.setInt(1, cliente.getIdCliente());
             ps.setInt(2, cliente.getNumero_cuenta());
             ps.setString(3, cliente.getNombre());
             ps.setInt(4, cliente.getTelefono());
             ps.setInt(5, cliente.getIdRutaEnvio());
-            ps.setInt(6, cliente.getPuntos());
-            ps.setInt(7, tipocliente);
             ps.executeUpdate();
             
             
@@ -195,6 +192,39 @@ public class ClienteDAOImpl extends DAO implements ClienteDAO {
         return cliente;
     }
 
+    public ClienteDTO actualizarCliente(ClienteDTO cliente) throws SQLException {
+            
+        try {
+            String actualizarCliente = this.leerSQL("/ArchivosSQL/actualizarCliente.sql");
+            PreparedStatement ps = conexion.prepareStatement(actualizarCliente);
+            ps.setInt(1, cliente.getNumero_cuenta());
+            ps.setString(2, cliente.getNombre());
+            ps.setInt(3, cliente.getTelefono());
+            ps.setInt(4, cliente.getIdRutaEnvio());
+            ps.setInt(5, cliente.getIdCliente());
+            ps.executeUpdate();
+            ps.close();
+
+        }
+    
+    catch (Exception e
+
+    
+        ) {
+            e.printStackTrace();
+        throw new RuntimeException(e);
+    }
+
+    
+        finally {
+            this.cerrarConexion();
+    }
+    return cliente ;
+}
+}
+
+  
+
  
     
-}
+
