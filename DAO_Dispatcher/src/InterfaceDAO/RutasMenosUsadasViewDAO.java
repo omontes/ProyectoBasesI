@@ -6,14 +6,13 @@
 
 package InterfaceDAO;
 
-import DTO.ClienteDTO;
-import DTO.PaqueteDTO;
+import DTO.RutasMenosUsadasViewDTO;
 import java.util.ArrayList;
 
 /**
  *
  * @author Carlos
  */
-public interface ClienteDAO {
-    public ArrayList<PaqueteDTO> findAllPaquetes(int idCliente);
+public interface RutasMenosUsadasViewDAO {
+    public ArrayList<RutasMenosUsadasViewDTO> getRutas();
 }

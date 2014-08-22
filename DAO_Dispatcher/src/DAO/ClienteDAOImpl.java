@@ -52,12 +52,12 @@ public class ClienteDAOImpl extends DAO implements ClienteDAO {
     }
 
     @Override
-    public ArrayList<PaqueteDTO> findAllPaquetes(String cliente) {
+    public ArrayList<PaqueteDTO> findAllPaquetes(int idCliente) {
         ArrayList<PaqueteDTO> Paquetes = new ArrayList<PaqueteDTO>();
         try {
             String consularPaquetes_Cliente= this.leerSQL("/ArchivosSQL/ConsultaPaquetes_Cliente.sql");
             PreparedStatement stm = conexion.prepareStatement(consularPaquetes_Cliente);
-            stm.setString(1,cliente);
+            stm.setInt(1,idCliente);
             ResultSet rs = stm.executeQuery();
             while (rs.next()) {
                 PaqueteDTO paquete = new PaqueteDTO();
@@ -221,6 +221,22 @@ public class ClienteDAOImpl extends DAO implements ClienteDAO {
     }
     return cliente ;
 }
+
+    public void eliminarCliente(int id) throws SQLException {
+          try {
+            
+            String eliminarCliente= this.leerSQL("/ArchivosSQL/eliminarCliente.sql");
+            PreparedStatement ps = conexion.prepareStatement(eliminarCliente);
+            ps.setInt(1, id);
+            ps.executeUpdate();
+            ps.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw new RuntimeException(e);
+	       } finally {
+            this.cerrarConexion();
+        }
+    }
 }
 
   

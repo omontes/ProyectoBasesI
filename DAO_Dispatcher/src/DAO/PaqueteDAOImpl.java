@@ -79,6 +79,7 @@ public class PaqueteDAOImpl extends DAO implements PaqueteDAO {
                 paquete.setIdCliente(rs.getInt("idCliente"));
                 paquete.setCategoria(rs.getString("categoria"));
                 paquete.setEstadoActual(rs.getString("estadoActual"));
+                paquete.setEstado(rs.getInt("idEstado"));
                 listaPaquetes.add(paquete);
             }  
             statement.close();
