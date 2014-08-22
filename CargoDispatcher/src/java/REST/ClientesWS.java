@@ -16,6 +16,7 @@ import java.util.ArrayList;
 import javax.naming.NamingException;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.Consumes;
+import javax.ws.rs.DELETE;
 import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.GET;
@@ -117,4 +118,12 @@ public class ClientesWS {
     @Consumes("application/xml")
     public void putXml(String content) {
     }
+    
+    @DELETE 
+    @Path("{id}")
+    @Produces({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
+    public void deleteCliente(@PathParam("id") int id) throws SQLException, NamingException {
+		ClienteDAOImpl cliente_dao = new ClienteDAOImpl();
+                cliente_dao.eliminarCliente(id);
+	}
 }
