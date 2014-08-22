@@ -6,7 +6,9 @@
 
 package REST;
 
+import DAO.BestClientsViewDAOImpl;
 import DAO.ClienteDAOImpl;
+import DTO.BestClientsViewDTO;
 import DTO.ClienteDTO;
 import DTO.PaqueteDTO;
 import com.google.gson.Gson;
@@ -97,7 +99,23 @@ public class ClientesWS {
         }
         return feeds;
     }
-    
+     @GET
+    @Path("/getMejoresClientes")
+    @Produces("application/json")
+    public String getMejoresClientes() {
+        String feeds = null;
+        try {
+            BestClientsViewDAOImpl mejoresClientes_dao = new BestClientsViewDAOImpl();
+            ArrayList<BestClientsViewDTO> feedData = null;
+            feedData=mejoresClientes_dao.getAllClients();
+            Gson gson = new Gson();
+            feeds = gson.toJson(feedData);
+            
+        } catch (Exception e) {
+            System.out.println("Exception Error"); //Console 
+        }
+        return feeds;
+    }
     @POST
     @Consumes({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
     @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
