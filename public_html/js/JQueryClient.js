@@ -53,8 +53,12 @@ function deleteCliente() {
     console.log('deleteCliente');
     $.ajax({
         type: 'DELETE',
-        url: rootURL + 'cliente/' + $("#delete-value").val()
+        url: rootURL + 'cliente/' + $("#delete-value").val(),
+        success: function() {
+            getClientes();
+        }
     });
+    
 }
 
 // GET todas las rutas
