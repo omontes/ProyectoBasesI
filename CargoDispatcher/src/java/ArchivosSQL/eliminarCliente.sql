@@ -1,3 +1,3 @@
 DELETE 
-FROM cliente AS C
-WHERE C.`idCliente`=?;
+FROM cliente
+WHERE idCliente=?;
