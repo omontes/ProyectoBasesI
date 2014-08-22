@@ -193,8 +193,7 @@ html,body{
 .login-container{
     position: relative;
     width: 300px;
-    margin: 80px auto;
-    padding: 20px 40px 40px;
+    padding: 10px 40px 10px;
     text-align: center;
     background: #fff;
     border: 1px solid #ccc;
@@ -412,4 +411,48 @@ html,body{
 .campo-estado{
     text-decoration: underline;
     color:blue;
+}
+
+.container-repo {
+    padding-top: 40px; 
+}
+#details {
+    font-family: "Quicksand", sans-serif;
+    font-size: 60px;
+}
+#home-box > h2 {
+    font-family: "Quicksand", sans-serif;
+    font-weight: 400; line-height: 1.1;
+    color: #5fb0e4;
+}
+.price {
+    font-size: 25px; float: left;
+}
+.pricing_header {
+    background: none repeat scroll 0% 0% #5fb0e4;
+    border-radius: 5px 5px 0px 0px;
+    transition: background 0.4s ease-out 0s;
+}
+.pricing_header h3 { 
+    text-align:center;
+    line-height: 25px;
+    padding: 15px 0px; 
+    margin: 0px;
+    font-family: "Quicksand", sans-serif;
+    font-weight: 200;
+    color: #FFF; }
+
+.list-group-item:first-child {
+    border-top-right-radius: 0px;
+    border-top-left-radius: 0px;
+}
+
+.off {
+    text-decoration: line-through;
+    color: rgb(44, 62, 80);
+}
+
+.space {
+    height: 2px;
+    background-color:rgb(44, 62, 80);
 }

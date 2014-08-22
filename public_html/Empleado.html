@@ -25,9 +25,10 @@
         <!-- Metodos de la pagina actual-->
         <script>
             $(document).ready(function() {
-                //getPaquetesEmpleado();
+                $("#update-value").hide();
+                getPaquetesEmpleado();
                 $(".paq-add").click(function() {
-                    $("#edit-paquete #Heading").html("Agregar Cliente");
+                    $("#edit-paquete #Heading").html("Agregar Paquete");
                     $("#edit-paquete #numero").val("");
                     $("#edit-paquete #peso").val("");
                     $("#edit-paquete #descripcion").val("");
@@ -35,10 +36,19 @@
                     $("#edit-paquete #tipo").val("");
                     $("#edit-paquete #cliente").val("");
                 });
+                $('body').on('click', '.desalmacenar', function() {
+                    $("#update-value").val($(this).parents("tr").children("#campo-numero").html());
+                    desalmacenarPaquete();
+                });
+                $('body').on('click', '.desembalar', function() {
+                    $("#update-value").val($(this).parents("tr").children("#campo-numero").html());
+                    desembalarPaquete();
+                });
             });
         </script>
     </head>
     <body>
+        <input id="update-value" type="text" class="form-control">
         <div class="bs-header" id="content">
             <div class="container">
                 <h1>CargoDispatcher - Empleado</h1>

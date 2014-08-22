@@ -58,7 +58,7 @@ function deleteCliente() {
             getClientes();
         }
     });
-    
+
 }
 
 // GET todas las rutas
@@ -178,6 +178,34 @@ function getPaquetesEmpleado() {
     });
 }
 
+function desalmacenarPaquete() {
+    console.log('desalmacenarPaquete');
+    $.ajax({
+        type: 'POST',
+        contentType: 'application/json',
+        url: rootURL + "paquete/desalmacenar",
+        dataType: "json",
+        data: "[{\"idPaquete\":" + $("#update-value").val() + "}]",
+        success: function() {
+            getPaquetesEmpleado();
+        }
+    });
+}
+
+function desembalarPaquete() {
+    console.log('desembalarPaquete');
+    $.ajax({
+        type: 'POST',
+        contentType: 'application/json',
+        url: rootURL + "paquete/desembalar",
+        dataType: "json",
+        data: "[{\"idPaquete\":" + $("#update-value").val() + "}]",
+        success: function() {
+            getPaquetesEmpleado();
+        }
+    });
+}
+
 function renderClientes(data) {
     var i;
     var out = "";
@@ -244,13 +272,13 @@ function renderPaquetesEmpleado(data) {
         out += "<td id=\"campo-valor\">" + data[i].valor + "</td>";
         out += "<td id=\"campo-tipo\">" + data[i].categoria + "</td>";
         out += "<td id=\"campo-cliente\">" + data[i].idCliente + "</td>";
-        if(data[i].estado==="2"){
-            out +="<td><p><button class=\"btn btn-primary btn-xs desalmacenar\" data-title=\"Desalmacenar\" ><span class=\"glyphicon glyphicon-plane\"></span></button></p><td>";
-            out +="<td><td>";
+        if (data[i].estado === "2") {
+            out += "<td><p><button class=\"btn btn-primary btn-xs desalmacenar\" data-title=\"Desalmacenar\" ><span class=\"glyphicon glyphicon-plane\"></span></button></p><td>";
+            out += "<td><td>";
         }
-        if(data[i].estado==="5"){
-            out +="<td><td>";
-            out +="<td><p><button class=\"btn btn-primary btn-xs desembalar\" data-title=\"Desembalar\" ><span class=\"glyphicon glyphicon-gift\"></span></button></p><td>";
+        if (data[i].estado === "5") {
+            out += "<td><td>";
+            out += "<td><p><button class=\"btn btn-primary btn-xs desembalar\" data-title=\"Desembalar\" ><span class=\"glyphicon glyphicon-gift\"></span></button></p><td>";
         }
     }
     $("#paq-table-body").html(out);
