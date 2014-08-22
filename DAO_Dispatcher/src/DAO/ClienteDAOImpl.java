@@ -221,6 +221,22 @@ public class ClienteDAOImpl extends DAO implements ClienteDAO {
     }
     return cliente ;
 }
+
+    public void eliminarCliente(int id) throws SQLException {
+          try {
+            
+            String eliminarCliente= this.leerSQL("/ArchivosSQL/eliminarCliente.sql");
+            PreparedStatement ps = conexion.prepareStatement(eliminarCliente);
+            ps.setInt(1, id);
+            ps.executeUpdate();
+            ps.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw new RuntimeException(e);
+	       } finally {
+            this.cerrarConexion();
+        }
+    }
 }
 
   
