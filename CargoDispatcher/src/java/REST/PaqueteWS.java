@@ -39,7 +39,7 @@ public class PaqueteWS {
 
  
     @GET
-    @Path("/getPaquetesAlmacenados")
+    @Path("/getPaquetesEmpleado")
     @Produces("application/json")
     public String getPaquetesAlmacenados() {
         String jason = null;
