@@ -8,9 +8,11 @@ package REST;
 
 import DAO.BestClientsViewDAOImpl;
 import DAO.ClienteDAOImpl;
+import DAO.WorstClientsViewDAOImpl;
 import DTO.BestClientsViewDTO;
 import DTO.ClienteDTO;
 import DTO.PaqueteDTO;
+import DTO.WorstClientsViewDTO;
 import com.google.gson.Gson;
 import java.io.IOException;
 import java.sql.SQLException;
@@ -99,7 +101,7 @@ public class ClientesWS {
         }
         return feeds;
     }
-     @GET
+    @GET
     @Path("/getMejoresClientes")
     @Produces("application/json")
     public String getMejoresClientes() {
@@ -108,6 +110,23 @@ public class ClientesWS {
             BestClientsViewDAOImpl mejoresClientes_dao = new BestClientsViewDAOImpl();
             ArrayList<BestClientsViewDTO> feedData = null;
             feedData=mejoresClientes_dao.getAllClients();
+            Gson gson = new Gson();
+            feeds = gson.toJson(feedData);
+            
+        } catch (Exception e) {
+            System.out.println("Exception Error"); //Console 
+        }
+        return feeds;
+    }
+    @GET
+    @Path("/getPeoresClientes")
+    @Produces("application/json")
+    public String getPeoresClientes() {
+        String feeds = null;
+        try {
+            WorstClientsViewDAOImpl peoresClientes_dao = new WorstClientsViewDAOImpl();
+            ArrayList<WorstClientsViewDTO> feedData = null;
+            feedData=peoresClientes_dao.getAllClients();
             Gson gson = new Gson();
             feeds = gson.toJson(feedData);
             
