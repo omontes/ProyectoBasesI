@@ -4,8 +4,8 @@
         <title>Cliente</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width">
-        
-       <!-- CSS -->
+
+        <!-- CSS -->
         <!-- CSS Bootstrap -->
         <link href="css/MyCSS.css" rel="stylesheet" type="text/css">
         <link href="css/bootstrap-responsive.css" rel="stylesheet" type="text/css">
@@ -37,12 +37,61 @@
                 <div id="output"></div>
                 <div class="form-box">
                     <form action="" method="">
-                        <input name="cliente" type="text" placeholder="Número de cuenta">
-                        <input type="password" placeholder="Contraseña" disabled>
+                        <input name="cliente" type="text" placeholder="Número de cedula">
                         <a href="Cliente.html" class="rmLink" target="_self" style="width: 161px;">
                             <button class="btn btn-info btn-block login" type="submit">Login</button></a>
                     </form>
                 </div>
             </div>
+        </div>
+
+        <div class="container-factura">
+            <div class="titulo-factura">
+                <h2>Factura</h2><h3 id="numero-paquete" class="pull-right">Orden# 12345</h3>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="panel panel-default">
+                        <table class="table table-condensed tabla-factura">
+                                <tr>
+                                    <td class="subtitulo-factura"><strong>Nuestros Cargos</strong></td>
+                                    <td class="text-right subtitulo-factura"><strong>USD</strong></td>
+                                </tr>
+                                <tr>
+                                    <td>Flete</td>
+                                    <td id="factura-flete" class="text-right">$60.00</td>
+                                </tr>
+                                <tr>
+                                    <td>Costo de Almacenaje</td>
+                                    <td id="factura-almacenaje" class="text-right">$60.00</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Subtotal</strong></td>
+                                    <td class="text-right">$60.00</td>
+                                </tr>
+                                <tr>
+                                    <td class="subtitulo-factura"><strong>Cargos del gobierno</strong></td>
+                                    <td class="text-right"><strong></strong></td>
+                                </tr>
+                            <tbody>
+                                <!-- foreach ($order->lineItems as $line) or some such thing here -->
+                                <tr>
+                                    <td>IV Importación</td>
+                                    <td id="factura-impuesto" class="text-right">$10.99</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Subtotal</strong></td>
+                                    <td class="text-right">$60.00</td>
+                                </tr>
+                                <tr>
+                                    <td class="thick-line text-center subtitulo-factura"><strong>Total</strong></td>
+                                    <td class="thick-line text-right subtitulo-factura">$670.99</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
     </body>
 </html>

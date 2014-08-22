@@ -341,24 +341,65 @@ html,body{
 }
 
 .bs-header {
-  color: #FFF;
-  text-align: center;
-  background-color: #5fb0e4;
-  background-image: url('../img/triangles.jpg');
-  text-shadow: 0 1px 3px rgba(0,0,0,.4), 0 0 30px rgba(0,0,0,.075);
-  background-repeat: no-repeat;
-  background-position: center center; 
-  background-size: cover;
+    color: #FFF;
+    text-align: center;
+    background-color: #5fb0e4;
+    background-image: url('../img/triangles.jpg');
+    text-shadow: 0 1px 3px rgba(0,0,0,.4), 0 0 30px rgba(0,0,0,.075);
+    background-repeat: no-repeat;
+    background-position: center center; 
+    background-size: cover;
 }
 
 .bs-footer {
-  color: #FFF;
-  text-align: center;
-  background-color: #5fb0e4;
-  background-image: url('../img/truck.jpg');
-  text-shadow: 0 1px 3px rgba(0,0,0,.4), 0 0 30px rgba(0,0,0,.075);
-  background-repeat: no-repeat;
-  background-position: center center; 
-  background-size: cover;
-   height:400px;
+    color: #FFF;
+    text-align: center;
+    background-color: #5fb0e4;
+    background-image: url('../img/truck.jpg');
+    text-shadow: 0 1px 3px rgba(0,0,0,.4), 0 0 30px rgba(0,0,0,.075);
+    background-repeat: no-repeat;
+    background-position: center center; 
+    background-size: cover;
+    height:400px;
+}
+
+.invoice-title h2, .invoice-title h3 {
+    display: inline-block;
+}
+
+.table > tbody > tr > .no-line {
+    border-top: none;
+}
+
+.table > thead > tr > .no-line {
+    border-bottom: none;
+}
+
+.table > tbody > tr > .thick-line {
+    border-top: 2px solid;
+}
+
+
+.container-factura{
+    width: 400px;
+    background-color: #5fb0e4;
+}
+
+.tabla-factura{
+    width: 400px;
+}
+
+.subtitulo-factura{
+    color:#428BCA;
+}
+
+.titulo-factura{
+    
+    color: #FFF;
+    background-color: #5fb0e4;
+    background-image: url('../img/triangles.jpg');
+    text-shadow: 0 1px 3px rgba(0,0,0,.4), 0 0 30px rgba(0,0,0,.075);
+    background-repeat: no-repeat;
+    background-position: center center; 
+    background-size: cover;
 }

@@ -77,3 +77,4 @@ $(".btnsito").toggle(function()
    $("#cedula").value = clicked;
 });
 
+
