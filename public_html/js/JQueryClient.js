@@ -206,6 +206,21 @@ function desembalarPaquete() {
     });
 }
 
+// POST un paquete
+function postPaquete() {
+    console.log('postPaquete');
+    $.ajax({
+        type: 'POST',
+        contentType: 'application/json',
+        url: rootURL + "paquete",
+        dataType: "json",
+        data: paqueteToJSON(),
+        success: function() {
+            getClientes();
+        }
+    });
+}
+
 function renderClientes(data) {
     var i;
     var out = "";
@@ -314,5 +329,16 @@ function contenedorToJSON() {
         "idContenedor": $("#edit-contenedor #numero").val(),
         "idRuta": $("#edit-contenedor #ruta").val(),
         "peso_max": $("#edit-contenedor #peso").val()
+    });
+}
+
+function paqueteToJSON() {
+    return JSON.stringify({
+        "idPaquete": $("#edit-paquete #numero").val(),
+        "peso": $("#edit-paquete #peso").val(),
+        "descripcion": $("#edit-paquete #descripcion").val(),
+        "valor": $("#edit-paquete #valor").val(),
+        "categoria": $("#edit-paquete #tipo").val(),
+        "idCliente": $("#edit-paquete #cliente").val(),
     });
 }

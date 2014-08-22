@@ -44,6 +44,10 @@
                     $("#update-value").val($(this).parents("tr").children("#campo-numero").html());
                     desembalarPaquete();
                 });
+                $(".btn-paq-post").click(function() {
+                    $('#edit-paquete').modal('hide');
+                    postPaquete();
+                });
             });
         </script>
     </head>
