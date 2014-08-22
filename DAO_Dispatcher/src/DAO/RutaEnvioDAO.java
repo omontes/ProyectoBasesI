@@ -148,4 +148,37 @@ public class RutaEnvioDAO extends DAO {
         }
     }
     
+  
+
+    public RutaEnvioDTO actualizarRuta(RutaEnvioDTO ruta) throws SQLException {
+              
+        try {
+            String actualizarRuta = this.leerSQL("/ArchivosSQL/actualizarRuta.sql");
+            PreparedStatement ps = conexion.prepareStatement(actualizarRuta);
+            ps.setInt(1, ruta.getTiempo_dias());
+            ps.setBigDecimal(2, ruta.getCosto());
+            ps.setString(3, ruta.getNombre());
+            ps.setInt(4, ruta.getMaximocontenedor());
+            ps.setInt(5, ruta.getIdRutaEnvio());
+            ps.executeUpdate();
+            ps.close();
+
+        }
+    
+    catch (Exception e
+
+    
+        ) {
+            e.printStackTrace();
+        throw new RuntimeException(e);
+    }
+
+    
+        finally {
+            this.cerrarConexion();
+    }
+    return ruta ;
+    }
+    
+    
 }
