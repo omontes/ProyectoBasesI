@@ -23,7 +23,7 @@ function getClientes() {
     $.ajax({
         
         type: 'GET',
-        url: rootURL + "/cliente/verificarCliente/115590955",
+        url: rootURL + "/cliente/getClientes",
         dataType: "json",
         success: function(data) {
             $('#h1').append("Consulta Realizada");
