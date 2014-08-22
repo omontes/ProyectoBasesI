@@ -62,14 +62,14 @@ public class ClientesWS {
         return feeds;
     }
     @GET
-    @Path("/getPaquetes/{query}")
+    @Path("/getPaquetes/{idCliente}")
     @Produces("application/json")
-    public String getPaquetes(@PathParam("query") String query) {
+    public String getPaquetes(@PathParam("idCliente") int idCliente) {
         String feeds = null;
         try {
             ClienteDAOImpl cliente_dao = new ClienteDAOImpl();
             ArrayList<PaqueteDTO> feedData = null;
-            feedData=cliente_dao.findAllPaquetes(query);
+            feedData=cliente_dao.findAllPaquetes(idCliente);
             Gson gson = new Gson();
             feeds = gson.toJson(feedData);
         } catch (Exception e) {
