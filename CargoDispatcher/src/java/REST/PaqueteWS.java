@@ -9,6 +9,7 @@ package REST;
 import DAO.PaqueteDAOImpl;
 import DTO.PaqueteDTO;
 import com.google.gson.Gson;
+import java.util.ArrayList;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.UriInfo;
 import javax.ws.rs.PathParam;
@@ -35,7 +36,24 @@ public class PaqueteWS {
     public PaqueteWS() {
     }
 
+
  
+    @GET
+    @Path("/getPaquetesEmpleado")
+    @Produces("application/json")
+    public String getPaquetesAlmacenados() {
+        String jason = null;
+        try {
+            PaqueteDAOImpl paquete_dao = new PaqueteDAOImpl();
+            ArrayList<PaqueteDTO> feedData = null;
+            feedData=paquete_dao.getPaquetesAlmacenadosyListos();
+            Gson gson = new Gson();
+            jason = gson.toJson(feedData);
+        } catch (Exception e) {
+            System.out.println("Exception Error"); //Console 
+        }
+        return jason;
+    }
     @GET
     @Path("/desalmacenar/{paquete}")
     @Produces("application/json")
