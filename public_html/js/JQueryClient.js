@@ -203,7 +203,7 @@ function renderRutas(data) {
         out += "<td id=\"campo-nombre\">" + data[i].nombre + "</td>";
         out += "<td id=\"campo-salida\">" + data[i].pto_salida + "</td>";
         out += "<td id=\"campo-llegada\">" + data[i].pto_llegada + "</td>";
-        out += "<td id=\"campo-tiempo\">" + data[i].tiempo + "</td>";
+        out += "<td id=\"campo-tiempo\">" + data[i].tiempo_dias + "</td>";
         out += "<td id=\"campo-costo\">" + data[i].costo + "</td>";
         out += "<td id=\"campo-contenedores\">" + data[i].maximocontenedor + "</td>";
         out += "<td><p><button class=\"btn btn-primary btn-xs rut-edit\" data-title=\"Edit-ruta\" data-toggle=\"modal\" data-target=\"#edit-ruta\" data-placement=\"top\" rel=\"tooltip\"><span class=\"glyphicon glyphicon-pencil\"></span></button></p></td>";
@@ -271,7 +271,7 @@ function rutaToJSON() {
         "nombre": $("#edit-ruta #nombre").val(),
         "pto_salida": $("#edit-ruta #salida").val(),
         "pto_llegada": $("#edit-ruta #llegada").val(),
-        "tiempo": $("#edit-ruta #tiempo").val(),
+        "tiempo_dias": $("#edit-ruta #tiempo").val(),
         "costo": $("#edit-ruta #costo").val(),
         "maximocontenedor": $("#edit-ruta #contenedores").val()
     });
