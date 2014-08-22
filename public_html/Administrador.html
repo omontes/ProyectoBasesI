@@ -74,11 +74,13 @@
                 
                 $(".rut-add").click(function() {
                     $("#edit-ruta #Heading").html("Agregar Ruta");
-                    $("#edit-cliente #cedula").prop('disabled', false);
+                    $("#edit-ruta #numero").prop('disabled', false);
                     $("#edit-ruta #numero").val("");
                     $("#edit-ruta #nombre").val("");
                     $("#edit-ruta #salida").val("");
+                    $("#edit-ruta #salida").prop('disabled', true);
                     $("#edit-ruta #llegada").val("");
+                    $("#edit-ruta #llegada").prop('disabled', true);
                     $("#edit-ruta #tiempo").val("");
                     $("#edit-ruta #costo").val("");
                     $("#edit-ruta #contenedores").val("");
@@ -87,11 +89,13 @@
                 });
                 $('body').on('click', '.rut-edit', function() {
                     $("#edit-ruta #Heading").html("Editar Ruta");
-                    $("#edit-ruta #cedula").prop('disabled', true);
+                    $("#edit-ruta #numero").prop('disabled', true);
                     $("#edit-ruta #numero").val($(this).parents("tr").children("#campo-numero").html());
                     $("#edit-ruta #nombre").val($(this).parents("tr").children("#campo-nombre").html());
                     $("#edit-ruta #salida").val($(this).parents("tr").children("#campo-salida").html());
+                    $("#edit-ruta #salida").prop('disabled', true);
                     $("#edit-ruta #llegada").val($(this).parents("tr").children("#campo-llegada").html());
+                    $("#edit-ruta #llegada").prop('disabled', true);
                     $("#edit-ruta #tiempo").val($(this).parents("tr").children("#campo-tiempo").html());
                     $("#edit-ruta #costo").val($(this).parents("tr").children("#campo-costo").html());
                     $("#edit-ruta #contenedores").val($(this).parents("tr").children("#campo-contenedores").html());
@@ -116,7 +120,7 @@
                 
                 $(".con-add").click(function() {
                     $("#edit-contenedor #Heading").html("Agregar Contenedor");
-                    $("#edit-cliente #cedula").prop('disabled', false);
+                    $("#edit-contenedor #numero").prop('disabled', false);
                     $("#edit-contenedor #numero").val("");
                     $("#edit-contenedor #ruta").val("");
                     $("#edit-contenedor #peso").val("");
@@ -125,7 +129,7 @@
                 });
                 $('body').on('click', '.con-edit', function() {
                     $("#edit-contenedor #Heading").html("Editar Contenedor");
-                    $("#edit-contenedor #cedula").prop('disabled', true);
+                    $("#edit-contenedor #numero").prop('disabled', true);
                     $("#edit-contenedor #numero").val($(this).parents("tr").children("#campo-numero").html());
                     $("#edit-contenedor #ruta").val($(this).parents("tr").children("#campo-ruta").html());
                     $("#edit-contenedor #peso").val($(this).parents("tr").children("#campo-peso").html());
