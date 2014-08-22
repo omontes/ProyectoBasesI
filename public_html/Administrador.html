@@ -78,7 +78,9 @@
                     $("#edit-ruta #numero").val("");
                     $("#edit-ruta #nombre").val("");
                     $("#edit-ruta #salida").val("");
+                    $("#edit-ruta #salida").prop('disabled', true);
                     $("#edit-ruta #llegada").val("");
+                    $("#edit-ruta #llegada").prop('disabled', true);
                     $("#edit-ruta #tiempo").val("");
                     $("#edit-ruta #costo").val("");
                     $("#edit-ruta #contenedores").val("");
@@ -91,7 +93,9 @@
                     $("#edit-ruta #numero").val($(this).parents("tr").children("#campo-numero").html());
                     $("#edit-ruta #nombre").val($(this).parents("tr").children("#campo-nombre").html());
                     $("#edit-ruta #salida").val($(this).parents("tr").children("#campo-salida").html());
+                    $("#edit-ruta #salida").prop('disabled', true);
                     $("#edit-ruta #llegada").val($(this).parents("tr").children("#campo-llegada").html());
+                    $("#edit-ruta #llegada").prop('disabled', true);
                     $("#edit-ruta #tiempo").val($(this).parents("tr").children("#campo-tiempo").html());
                     $("#edit-ruta #costo").val($(this).parents("tr").children("#campo-costo").html());
                     $("#edit-ruta #contenedores").val($(this).parents("tr").children("#campo-contenedores").html());
