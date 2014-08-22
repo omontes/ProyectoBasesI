@@ -394,7 +394,7 @@ html,body{
 }
 
 .titulo-factura{
-    
+
     color: #FFF;
     background-color: #5fb0e4;
     background-image: url('../img/triangles.jpg');
@@ -402,4 +402,14 @@ html,body{
     background-repeat: no-repeat;
     background-position: center center; 
     background-size: cover;
+}
+
+.campo-numero{
+    text-decoration: underline;
+    color:blue;
+}
+
+.campo-estado{
+    text-decoration: underline;
+    color:blue;
 }
