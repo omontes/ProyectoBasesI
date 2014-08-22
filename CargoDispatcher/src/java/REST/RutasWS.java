@@ -53,8 +53,6 @@ public class RutasWS {
             ArrayList<RutaEnvioDTO> feedData = null;
             feedData=rutadao.consultarRutas();
             Gson gson = new Gson();
-            System.out.println("Llego aqui");
-            System.out.println(gson.toJson(feedData));
             feeds = gson.toJson(feedData);
         } catch (Exception e) {
             System.out.println("Exception Error"); //Console 
@@ -67,6 +65,15 @@ public class RutasWS {
     public RutaEnvioDTO create(RutaEnvioDTO ruta) throws SQLException, NamingException {
         RutaEnvioDAO ruta_dao = new RutaEnvioDAO();
         return ruta_dao.crearRuta(ruta);
+    }
+    
+    @POST
+    @Path("/update")
+    @Consumes({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
+    @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
+    public RutaEnvioDTO update(RutaEnvioDTO ruta) throws SQLException, NamingException {
+        RutaEnvioDAO ruta_dao = new  RutaEnvioDAO();
+        return ruta_dao.actualizarRuta(ruta);
     }
 
     /**

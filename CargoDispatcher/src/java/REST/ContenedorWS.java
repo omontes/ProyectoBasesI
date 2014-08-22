@@ -65,6 +65,15 @@ public class ContenedorWS {
         return contenedor_dao.crearContenedor(contenedor);
     }
 
+     
+    @POST
+    @Path("/update")
+    @Consumes({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
+    @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
+    public ContenedorDTO update(ContenedorDTO contenedor) throws SQLException, NamingException {
+        ContenedorDAOImpl contenedor_dao = new ContenedorDAOImpl();
+        return contenedor_dao.actualizarContenedor(contenedor);
+    }
     /**
      * PUT method for updating or creating an instance of ContenedorWS
      * @param content representation for the resource

@@ -89,8 +89,6 @@ public class ClientesWS {
             ArrayList<ClienteDTO> feedData = null;
             feedData=cliente_dao.consultarClientes();
             Gson gson = new Gson();
-            System.out.println("Llego aqui");
-            System.out.println(gson.toJson(feedData));
             feeds = gson.toJson(feedData);
             
         } catch (Exception e) {
