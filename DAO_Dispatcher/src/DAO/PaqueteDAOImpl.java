@@ -65,5 +65,39 @@ public class PaqueteDAOImpl extends DAO implements PaqueteDAO {
         }
     }
 
+    public ArrayList<PaqueteDTO> getPaquetesAlmacenadosyListos() throws SQLException, Exception {
+         ArrayList<PaqueteDTO> listaPaquetes = new ArrayList<PaqueteDTO>();
+        try {
+            String consultarPaquetesAlmacenadosyListos= this.leerSQL("/ArchivosSQL/consultarPaquetesAlmacenadosyListos.sql");
+            ResultSet rs = statement.executeQuery(consultarPaquetesAlmacenadosyListos);
+            while (rs.next()) {
+                PaqueteDTO paquete = new PaqueteDTO();
+                paquete.setIdPaquete(rs.getInt("idPaquete"));
+                paquete.setPeso(rs.getInt("peso"));
+                paquete.setDescripcion(rs.getString("descripcion"));
+                paquete.setValor(rs.getBigDecimal("valor"));
+                paquete.setIdCliente(rs.getInt("idCliente"));
+                paquete.setCategoria(rs.getString("categoria"));
+                paquete.setEstadoActual(rs.getString("estadoActual"));
+                listaPaquetes.add(paquete);
+            }  
+            statement.close();
+            return listaPaquetes;
+            
+
+
+        } catch (Exception e) {
+            System.out.println("Error al realizar la consulta de obtener "
+                    + "los paquetes almacenados");
+            throw(e);
+
+        }
+       finally {
+            this.cerrarConexion();
+        }
+    }
+
+
     
+
 }
