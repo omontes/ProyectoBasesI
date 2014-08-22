@@ -17,8 +17,9 @@ public class PaqueteDTO {
      private int peso;
      private String descripcion;
      private BigDecimal valor;
-     private int idCategoria;
-     private int idContenedor;
+     private String Categoria;
+     private String idContenedor;
+     private int idCliente;
      private String estadoActual;
 
     /**
@@ -77,24 +78,11 @@ public class PaqueteDTO {
         this.valor = valor;
     }
 
-    /**
-     * @return the idCategoria
-     */
-    public int getIdCategoria() {
-        return idCategoria;
-    }
-
-    /**
-     * @param idCategoria the idCategoria to set
-     */
-    public void setIdCategoria(int idCategoria) {
-        this.idCategoria = idCategoria;
-    }
-
+  
     /**
      * @return the idContenedor
      */
-    public int getIdContenedor() {
+    public String getIdContenedor() {
         return idContenedor;
     }
 
@@ -102,7 +90,7 @@ public class PaqueteDTO {
      * @param idContenedor the idContenedor to set
      */
     public void setIdContenedor(int idContenedor) {
-        this.idContenedor = idContenedor;
+        this.setIdContenedor(idContenedor);
     }
 
     /**
@@ -117,5 +105,40 @@ public class PaqueteDTO {
      */
     public void setEstadoActual(String estadoActual) {
         this.estadoActual = estadoActual;
+    }
+
+    /**
+     * @return the Categoria
+     */
+    public String getCategoria() {
+        return Categoria;
+    }
+
+    /**
+     * @param Categoria the Categoria to set
+     */
+    public void setCategoria(String Categoria) {
+        this.Categoria = Categoria;
+    }
+
+    /**
+     * @param idContenedor the idContenedor to set
+     */
+    public void setIdContenedor(String idContenedor) {
+        this.idContenedor = idContenedor;
+    }
+
+    /**
+     * @return the idCliente
+     */
+    public int getIdCliente() {
+        return idCliente;
+    }
+
+    /**
+     * @param idCliente the idCliente to set
+     */
+    public void setIdCliente(int idCliente) {
+        this.idCliente = idCliente;
     }
 }
