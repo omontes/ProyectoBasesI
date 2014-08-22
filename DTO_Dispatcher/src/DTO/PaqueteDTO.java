@@ -17,10 +17,11 @@ public class PaqueteDTO {
      private int peso;
      private String descripcion;
      private BigDecimal valor;
-     private String Categoria;
+     private String categoria;
      private String idContenedor;
      private int idCliente;
      private String estadoActual;
+     private int estado;
 
     /**
      * @return the idPaqueteDTO
@@ -108,17 +109,17 @@ public class PaqueteDTO {
     }
 
     /**
-     * @return the Categoria
+     * @return the categoria
      */
     public String getCategoria() {
-        return Categoria;
+        return categoria;
     }
 
     /**
-     * @param Categoria the Categoria to set
+     * @param Categoria the categoria to set
      */
     public void setCategoria(String Categoria) {
-        this.Categoria = Categoria;
+        this.categoria = Categoria;
     }
 
     /**
@@ -140,5 +141,19 @@ public class PaqueteDTO {
      */
     public void setIdCliente(int idCliente) {
         this.idCliente = idCliente;
+    }
+
+    /**
+     * @return the estado
+     */
+    public int getEstado() {
+        return estado;
+    }
+
+    /**
+     * @param estado the estado to set
+     */
+    public void setEstado(int estado) {
+        this.estado = estado;
     }
 }
