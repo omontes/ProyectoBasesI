@@ -7,7 +7,11 @@
 package REST;
 
 import DAO.RutaEnvioDAO;
+import DAO.RutasMasUsadasViewDAOImpl;
+import DAO.RutasMenosUsadasViewDAOImpl;
 import DTO.RutaEnvioDTO;
+import DTO.RutasMasUsadasViewDTO;
+import DTO.RutasMenosUsadasViewDTO;
 import com.google.gson.Gson;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -54,6 +58,40 @@ public class RutasWS {
             feedData=rutadao.consultarRutas();
             Gson gson = new Gson();
             feeds = gson.toJson(feedData);
+        } catch (Exception e) {
+            System.out.println("Exception Error"); //Console 
+        }
+        return feeds;
+    }
+    @GET
+    @Path("/getPeoresRutas")
+    @Produces("application/json")
+    public String getRutasMenosUsadas() {
+        String feeds = null;
+        try {
+            RutasMenosUsadasViewDAOImpl peoresRutas_dao = new RutasMenosUsadasViewDAOImpl();
+            ArrayList<RutasMenosUsadasViewDTO> feedData = null;
+            feedData=peoresRutas_dao.getRutas();
+            Gson gson = new Gson();
+            feeds = gson.toJson(feedData);
+            
+        } catch (Exception e) {
+            System.out.println("Exception Error"); //Console 
+        }
+        return feeds;
+    }
+     @GET
+    @Path("/getMejoresRutas")
+    @Produces("application/json")
+    public String getRutasMasUsadas() {
+        String feeds = null;
+        try {
+            RutasMasUsadasViewDAOImpl mejoresRutas_dao = new RutasMasUsadasViewDAOImpl();
+            ArrayList<RutasMasUsadasViewDTO> feedData = null;
+            feedData=mejoresRutas_dao.getRutas();
+            Gson gson = new Gson();
+            feeds = gson.toJson(feedData);
+            
         } catch (Exception e) {
             System.out.println("Exception Error"); //Console 
         }
