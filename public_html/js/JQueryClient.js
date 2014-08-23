@@ -430,7 +430,7 @@ function renderMejoresClientes(data) {
     var i;
     var out = "";
     for (i = 0; i < data.length; i++) {
-        out += "<li class=\"list-group-item\">" + data[i].nombre + "<li>";
+        out += "<li class=\"list-group-item\">" + data[i].nombre + "</li>";
     }
     $("#lista-mejores-clientes").html(out);
 }
@@ -439,7 +439,7 @@ function renderPeoresClientes(data) {
     var i;
     var out = "";
     for (i = 0; i < data.length; i++) {
-        out += "<li class=\"list-group-item\">" + data[i].nombre + "<li>";
+        out += "<li class=\"list-group-item\">" + data[i].nombre + "</li>";
     }
     $("#lista-peores-clientes").html(out);
 }
@@ -448,7 +448,7 @@ function renderMejoresRutas(data) {
     var i;
     var out = "";
     for (i = 0; i < data.length; i++) {
-        out += "<li class=\"list-group-item\">" + data[i].nombre + " ( " + data[i].pto_salida + " - " + data[i].pto_llegada + " ) <li>";
+        out += "<li class=\"list-group-item\">" + data[i].nombre + " ( " + data[i].pto_salida + " - " + data[i].pto_llegada + " ) </li>";
     }
     $("#lista-mejores-rutas").html(out);
 }
@@ -457,7 +457,7 @@ function renderPeoresRutas(data) {
     var i;
     var out = "";
     for (i = 0; i < data.length; i++) {
-        out += "<li class=\"list-group-item\">" + data[i].nombre + " ( " + data[i].pto_salida + " - " + data[i].pto_llegada + " ) <li>";
+        out += "<li class=\"list-group-item\">" + data[i].nombre + " ( " + data[i].pto_salida + " - " + data[i].pto_llegada + " ) </li>";
     }
     $("#lista-peores-rutas").html(out);
 }
