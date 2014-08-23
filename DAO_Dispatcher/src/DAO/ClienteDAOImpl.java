@@ -138,6 +138,9 @@ public class ClienteDAOImpl extends DAO implements ClienteDAO {
             throw(e);
 
         }
+         finally {
+            this.cerrarConexion();
+        }
 
     
     }
@@ -236,6 +239,40 @@ public class ClienteDAOImpl extends DAO implements ClienteDAO {
 	       } finally {
             this.cerrarConexion();
         }
+    }
+
+    public ClienteDTO consultarCliente(ClienteDTO cliente) throws Exception{
+         
+        try {
+            
+            String consultarCliente = this.leerSQL("/ArchivosSQL/ConsultaCliente.sql");
+            PreparedStatement ps = conexion.prepareStatement(consultarCliente);
+            ps.setInt(1, cliente.getIdCliente());
+            ResultSet rs =ps.executeQuery();
+            while (rs.next()) {
+                
+                cliente.setIdCliente(rs.getInt("idCliente"));
+                cliente.setNumero_cuenta(rs.getInt("numero_cuenta"));
+                cliente.setNombre(rs.getString("nombre"));
+                cliente.setTelefono(rs.getInt("telefono"));
+                cliente.setIdRutaEnvio(rs.getInt("idRutaEnvio"));
+                cliente.setPuntos(rs.getInt("puntos"));
+                cliente.setTipo(rs.getString("tipo"));
+
+                
+            }
+            
+            conexion.close();
+            ps.close();
+            
+            
+        } catch (Exception e) {
+            
+            throw (e);
+	       } finally {
+            this.cerrarConexion();
+        }
+        return cliente;
     }
 }
 
