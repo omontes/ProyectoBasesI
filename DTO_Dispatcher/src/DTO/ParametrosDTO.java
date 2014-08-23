@@ -6,28 +6,28 @@
 
 package DTO;
 
-import java.sql.Timestamp;
+
 
 /**
  *
  * @author Oscar Montes
  */
 public class ParametrosDTO {
-     private Timestamp diaActual;
+     private String diaActual;
      private int porcent_vol_contenedor;
      private int costo_almacenado;
 
     /**
      * @return the diaActual
      */
-    public Timestamp getDiaActual() {
+    public String getDiaActual() {
         return diaActual;
     }
 
     /**
      * @param diaActual the diaActual to set
      */
-    public void setDiaActual(Timestamp diaActual) {
+    public void setDiaActual(String diaActual) {
         this.diaActual = diaActual;
     }
 
