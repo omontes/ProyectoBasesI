@@ -35,6 +35,7 @@ public class ApplicationConfig extends Application {
         resources.add(REST.ContenedorWS.class);
         resources.add(REST.HistorialPaqueteWS.class);
         resources.add(REST.PaqueteWS.class);
+        resources.add(REST.ParametrosWS.class);
         resources.add(REST.RutasWS.class);
     }
     
