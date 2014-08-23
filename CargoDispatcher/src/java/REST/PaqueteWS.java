@@ -58,10 +58,27 @@ public class PaqueteWS {
     public String desalmacenarPaquete(@PathParam("paquete") int idPaquete) {
         String jason = null;
         try {
-            PaqueteDAOImpl cliente_dao = new PaqueteDAOImpl();
+            PaqueteDAOImpl paquete_dao = new PaqueteDAOImpl();
             PaqueteDTO paquete = new PaqueteDTO();
             paquete.setIdPaquete(idPaquete);
-            paquete=cliente_dao.desalmacenarPaquete(paquete);
+            paquete=paquete_dao.desalmacenarPaquete(paquete);
+            Gson gson = new Gson();
+            jason = gson.toJson(paquete);
+        } catch (Exception e) {
+            System.out.println("Exception Error"); //Console 
+        }
+        return jason;
+    }
+    @GET
+    @Path("/desembalar/{paquete}")
+    @Produces("application/json")
+    public String desembalarPaquete(@PathParam("paquete") int idPaquete) {
+        String jason = null;
+        try {
+            PaqueteDAOImpl paquete_dao = new PaqueteDAOImpl();
+            PaqueteDTO paquete = new PaqueteDTO();
+            paquete.setIdPaquete(idPaquete);
+            paquete=paquete_dao.desembalarPaquete(paquete);
             Gson gson = new Gson();
             jason = gson.toJson(paquete);
         } catch (Exception e) {
