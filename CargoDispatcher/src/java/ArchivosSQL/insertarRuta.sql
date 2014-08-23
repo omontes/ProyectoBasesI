@@ -1,3 +1,3 @@
-INSERT INTO rutaenvio(idRutaEnvio,nombre,direccion_ruta,tiempo_dias,costo,maximocontenedor)
-VALUES(?,?,?,?,?,?);
+INSERT INTO rutaenvio(idRutaEnvio,nombre,tiempo_dias,costo,maximocontenedor)
+VALUES(?,?,?,?,?);
 
