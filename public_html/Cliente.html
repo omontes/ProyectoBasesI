@@ -26,17 +26,18 @@
         <script>
             $(document).ready(function() {
                 $("#tabla-paquetes").hide();
+                $("#paquete-value").hide();
                 $("#login-cliente").click(function() {
                     $("#tabla-paquetes").show();
                     if ($("#cedula-cliente").val() !== "")
                         getPaquetesCliente();
                 });
                 $('body').on('click', '.campo-numero', function() {
-
-                }
+                    $("#paquete-value").val($(this).html());
+                });
                 $('body').on('click', '.campo-estado', function() {
-
-                }
+                    $("#paquete-value").val($(this).parents("tr").children(".campo-numero").html());
+                });
             });
         </script>
     </head>
