@@ -165,6 +165,32 @@ function deleteContenedor() {
     });
 }
 
+function getParametros() {
+    console.log('getParametros');
+    $.ajax({
+        type: 'GET',
+        url: rootURL + "parametros/getParametros",
+        dataType: "json",
+        success: function(data) {
+            renderParametros(data);
+        }
+    });
+}
+
+function updateParametros() {
+    console.log('updateParametros');
+    $.ajax({
+        type: 'POST',
+        contentType: 'application/json',
+        url: rootURL + "parametros/update",
+        dataType: "json",
+        data: parametrosToJSON(),
+        success: function() {
+            getParametros();
+        }
+    });
+}
+
 // GET todos los paquetes en almacenaje
 function getPaquetesEmpleado() {
     console.log('getPaquetesEmpleado');
@@ -212,7 +238,7 @@ function postPaquete() {
         dataType: "json",
         data: paqueteToJSON(),
         success: function() {
-            getClientes();
+            getPaquetesEmpleado();
         }
     });
 }
@@ -357,6 +383,12 @@ function renderContenedores(data) {
     $("#con-table-body").html(out);
 }
 
+function renderParametros(data) {
+    $("#edit-parametros #fecha").html(data[0].diaActual);
+    $("#edit-parametros #porcentaje").html(data[0].porcent_vol_contenedor);
+    $("#edit-parametros #costo").html(data[0].costo_almacenado);
+    }
+
 function renderPaquetesEmpleado(data) {
     var i;
     var out = "";
@@ -491,6 +523,14 @@ function contenedorToJSON() {
         "idContenedor": $("#edit-contenedor #numero").val(),
         "idRuta": $("#edit-contenedor #ruta").val(),
         "peso_max": $("#edit-contenedor #peso").val()
+    });
+}
+
+function parametrosToJSON() {
+    return JSON.stringify({
+        "diaActual": $("#edit-parametros #fecha").val(),
+        "porcent_vol_contenedor": $("#edit-parametros #porcentaje").val(),
+        "costo_almacenado": $("#edit-parametros #costo").val()
     });
 }
 
