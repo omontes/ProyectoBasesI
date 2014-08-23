@@ -15,5 +15,5 @@ import java.util.ArrayList;
  * @author Carlos
  */
 public interface ClienteDAO {
-    public ArrayList<PaqueteDTO> findAllPaquetes(int idCliente);
+    public ArrayList<PaqueteDTO> findAllPaquetes(int idCliente) throws Exception;
 }

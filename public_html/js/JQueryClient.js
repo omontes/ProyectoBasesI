@@ -222,7 +222,7 @@ function getPaquetesCliente() {
     console.log('getPaquetesCliente');
     $.ajax({
         type: 'GET',
-        url: rootURL + "paquete/getPaquetesCliente/" + $("#cedula-cliente").val(),
+        url: rootURL + "cliente/getPaquetes/" + $("#cedula-cliente").val(),
         dataType: "json",
         success: function(data) {
             renderPaquetesCliente(data);

@@ -52,7 +52,7 @@ public class ClienteDAOImpl extends DAO implements ClienteDAO {
     }
 
     @Override
-    public ArrayList<PaqueteDTO> findAllPaquetes(int idCliente) {
+    public ArrayList<PaqueteDTO> findAllPaquetes(int idCliente) throws Exception {
         ArrayList<PaqueteDTO> Paquetes = new ArrayList<PaqueteDTO>();
         try {
             String consularPaquetes_Cliente= this.leerSQL("/ArchivosSQL/ConsultaPaquetes_Cliente.sql");
@@ -70,13 +70,13 @@ public class ClienteDAOImpl extends DAO implements ClienteDAO {
             return Paquetes;
         } catch (Exception e) {
             System.out.println("Error al realizar la consulta de clientes");
-            try {
-                throw(e);
-            } catch (Exception ex) {
-                Logger.getLogger(ClienteDAOImpl.class.getName()).log(Level.SEVERE, null, ex);
-            }
+            throw(e);
+            
         }
-        return null;
+        finally {
+            this.cerrarConexion();
+        }
+        
         
     }
 
