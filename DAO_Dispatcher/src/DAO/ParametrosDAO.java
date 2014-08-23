@@ -49,7 +49,7 @@ public class ParametrosDAO extends DAO {
             ParametrosDTO parametros = new ParametrosDTO();
             while (rs.next()) {
 
-                parametros.setDiaActual(rs.getTimestamp("diaActual"));
+                parametros.setDiaActual(rs.getString("diaActual"));
                 parametros.setPorcent_vol_contenedor(rs.getInt("porcent_vol_contenedor"));
                 parametros.setCosto_almacenado(rs.getInt("costo_almacenado"));
 
@@ -77,7 +77,7 @@ public class ParametrosDAO extends DAO {
         try {
             String actualizarParametros = this.leerSQL("/ArchivosSQL/actualizarParametros.sql");
             PreparedStatement ps = conexion.prepareStatement(actualizarParametros);
-            ps.setTimestamp(1, parametros.getDiaActual());
+            ps.setString(1, parametros.getDiaActual());
             ps.setInt(2, parametros.getPorcent_vol_contenedor());
             ps.setInt(3, parametros.getCosto_almacenado());
             ps.executeUpdate();
