@@ -102,14 +102,14 @@ public class RutaEnvioDAO extends DAO {
        try {
             
             String insertarRuta= this.leerSQL("/ArchivosSQL/insertarRuta.sql");
-            int direccion= this.obtenerDireccionRuta(ruta);
+            int direccion= this.crearDireccionRuta(ruta);
             PreparedStatement ps = conexion.prepareStatement(insertarRuta);
             ps.setInt(1, ruta.getIdRutaEnvio());
             ps.setString(2, ruta.getNombre());
-            ps.setInt(3, direccion);
-            ps.setInt(4, ruta.getTiempo_dias());
-            ps.setBigDecimal(5, ruta.getCosto());
-            ps.setInt(6, ruta.getMaximocontenedor());
+            ps.setInt(3, ruta.getTiempo_dias());
+            ps.setBigDecimal(4, ruta.getCosto());
+            ps.setInt(5, ruta.getMaximocontenedor());
+            ps.setInt(6, direccion);
             ps.executeUpdate();
             
             
@@ -178,6 +178,30 @@ public class RutaEnvioDAO extends DAO {
             this.cerrarConexion();
     }
     return ruta ;
+    }
+
+    private int crearDireccionRuta(RutaEnvioDTO ruta) throws Exception{
+         int idRuta = 0;    
+         try {
+            String crearDireccionRuta= this.leerSQL("/ArchivosSQL/crearDireccionRuta.sql");
+            PreparedStatement stm = conexion.prepareStatement(crearDireccionRuta,Statement.RETURN_GENERATED_KEYS);
+            stm.setString(1,ruta.getPto_llegada());
+            stm.setString(2,ruta.getPto_salida());
+            stm.executeUpdate();
+            ResultSet rs = stm.getGeneratedKeys();
+            rs.next();
+            idRuta = rs.getInt(1);
+            statement.close();
+            return idRuta;
+            
+
+
+        } catch (Exception e) {
+            System.out.println("Error al realizar la insercion de ruta");
+            throw(e);
+
+        }
+      
     }
     
     
