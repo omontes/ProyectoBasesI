@@ -102,6 +102,24 @@ public class ClientesWS {
         return feeds;
     }
     @GET
+    @Path("/getCliente/{idCliente}")
+    @Produces("application/json")
+    public String getCliente(@PathParam("idCliente") int idCliente) {
+        String feeds = null;
+        try {
+            ClienteDAOImpl cliente_dao = new ClienteDAOImpl();
+            ClienteDTO cliente = new ClienteDTO();
+            cliente.setIdCliente(idCliente);
+            cliente=cliente_dao.consultarCliente(cliente);
+            Gson gson = new Gson();
+            feeds = gson.toJson(cliente);
+            
+        } catch (Exception e) {
+            System.out.println("Exception Error"); //Console 
+        }
+        return feeds;
+    }
+    @GET
     @Path("/getMejoresClientes")
     @Produces("application/json")
     public String getMejoresClientes() {
