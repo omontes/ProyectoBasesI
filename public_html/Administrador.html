@@ -14,7 +14,6 @@
         <link href="css/bootstrap.min.css" rel="stylesheet" type="text/css">
 
         <!-- Scripts -->
-        <script src="js/moment.min.js"></script>
         <!-- jQuery -->
         <script src="js/jquery.min.js"></script>
         <!-- JS Bootstrap -->
@@ -30,7 +29,7 @@
                 getClientes();
                 getRutas();
                 getContenedores();
-
+                getParametros();
                 $(".cli-add").click(function() {
                     $("#edit-cliente #Heading").html("Agregar Cliente");
                     $("#edit-cliente #cedula").prop('disabled', false);
@@ -151,6 +150,9 @@
                 $(".btn-con-delete").click(function() {
                     $('#delete-contenedor').modal('hide');
                     deleteContenedor();
+                });
+                $(".btn-par-update").click(function() {
+                    updateParametros();
                 });
             });
         </script>
@@ -502,20 +504,27 @@
             <!-- /.modal-dialog --> 
         </div>
 
-        <div class="container">
-            <div class="row">
-                <div class="col-sm-4">
-                    <div class="date-picker"  data-date="2014/08/23" data-keyboard="true">
-                        <div class="date-container pull-left">
-                            <h4 class="weekday"></h4>
-                            <h2 class="date"></h2>
-                            <h4 class="year pull-right"></h4>
+        <div id="edit-parametros" tabindex="-1" role="dialog" aria-labelledby="edit" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-body">
+                        <div>
+                            <input id="fecha" type="text" placeholder="Fecha del Sistema" class="form-control">
                         </div>
-                        <span data-toggle="datepicker" data-type="subtract" class="fa fa-angle-left"></span>
-                        <span data-toggle="datepicker" data-type="add" class="fa fa-angle-right"></span>
+                        <div>
+                            <input id="porcentaje" type="text" placeholder="Porsentaje para enviar contenedor" class="form-control">
+                        </div>
+                        <div>
+                            <input id="costo" type="text" placeholder="Costo de almacenado" class="form-control">
+                        </div>
+                    </div>
+                    <div class="modal-footer ">
+                        <button type="button" class="btn btn-warning btn-lg btn-par-update" style="width: 100%;"><span class="glyphicon glyphicon-ok-sign"></span> Update</button>
                     </div>
                 </div>
+                <!-- /.modal-content --> 
             </div>
+            <!-- /.modal-dialog --> 
         </div>
 
     </body>
