@@ -106,10 +106,9 @@ public class RutaEnvioDAO extends DAO {
             PreparedStatement ps = conexion.prepareStatement(insertarRuta);
             ps.setInt(1, ruta.getIdRutaEnvio());
             ps.setString(2, ruta.getNombre());
-            ps.setInt(3, direccion);
-            ps.setInt(4, ruta.getTiempo_dias());
-            ps.setBigDecimal(5, ruta.getCosto());
-            ps.setInt(6, ruta.getMaximocontenedor());
+            ps.setInt(3, ruta.getTiempo_dias());
+            ps.setBigDecimal(4, ruta.getCosto());
+            ps.setInt(5, ruta.getMaximocontenedor());
             ps.executeUpdate();
             
             

@@ -109,7 +109,7 @@ public class PaqueteDAOImpl extends DAO implements PaqueteDAO {
 
            return paquete;
         } catch (Exception e) {
-            System.out.println("Error al desembalar paquete");
+            System.out.println("Error al desembalarpaquete");
             throw(e);
         }
       finally {
