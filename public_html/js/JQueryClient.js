@@ -221,6 +221,44 @@ function postPaquete() {
     });
 }
 
+// GET todos los paquetes de un cliente
+function getPaquetesCliente() {
+    console.log('getPaquetesCliente');
+     $.ajax({
+        type: 'GET',
+        url: rootURL + "paquete/getPaquetesCliente/"+$("#cedula-cliente").val(),
+        dataType: "json",
+        success: function(data) {
+            renderPaquetesCliente(data);
+            $("#tabla-paquetes").show;
+        }
+    });
+}
+
+function getFacturaPaquete() {
+    console.log('getFacturaPaquete');
+     $.ajax({
+        type: 'GET',
+        url: rootURL + "factura/getFacturaPaquete/"+$("#paquete-value").val(),
+        dataType: "json",
+        success: function(data) {
+            renderFacturaPaquete(data);
+        }
+    });
+}
+
+function getTrackingPaquete() {
+    console.log('getTrackingPaquete');
+     $.ajax({
+        type: 'GET',
+        url: rootURL + "tracking/getTrackingPaquete/"+$("#paquete-value").val(),
+        dataType: "json",
+        success: function(data) {
+            renderTrackingPaquete(data);
+        }
+    });
+}
+
 function renderClientes(data) {
     var i;
     var out = "";
@@ -287,11 +325,11 @@ function renderPaquetesEmpleado(data) {
         out += "<td id=\"campo-valor\">" + data[i].valor + "</td>";
         out += "<td id=\"campo-tipo\">" + data[i].categoria + "</td>";
         out += "<td id=\"campo-cliente\">" + data[i].idCliente + "</td>";
-        if (data[i].estado === "2") {
+        if (data[i].idEstado === "2") {
             out += "<td><p><button class=\"btn btn-primary btn-xs desalmacenar\" data-title=\"Desalmacenar\" ><span class=\"glyphicon glyphicon-plane\"></span></button></p><td>";
             out += "<td><td>";
         }
-        if (data[i].estado === "5") {
+        if (data[i].idEstado === "5") {
             out += "<td><td>";
             out += "<td><p><button class=\"btn btn-primary btn-xs desembalar\" data-title=\"Desembalar\" ><span class=\"glyphicon glyphicon-gift\"></span></button></p><td>";
         }
@@ -299,6 +337,23 @@ function renderPaquetesEmpleado(data) {
     $("#paq-table-body").html(out);
 }
 
+function renderPaquetesCliente(data) {
+    var i;
+    var out = "";
+    for (i = 0; i < data.length; i++) {
+        out += "<tr>";
+        out += "<td class=\"campo-numero\" data-title=\"Factura-paquete\" data-toggle=\"modal\" data-target=\"#factura-paquete\">" + data[i].idPaquete + "</td>";
+        out += "<td>" + data[i].descripcion + "</td>";
+        out += "<td class=\"campo-estado\" data-title=\"Tracking-paquete\" data-toggle=\"modal\" data-target=\"#tracking-paquete\">" + data[i].estado + "</td>";
+    }
+    $("#paq-table-body").html(out);
+}
+
+function renderFacturaPaquete(data) {
+}
+
+function renderTrackingPaquete(data) {
+}
 
 function clienteToJSON() {
     return JSON.stringify({

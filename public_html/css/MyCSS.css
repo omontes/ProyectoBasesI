@@ -380,7 +380,7 @@ html,body{
 
 
 .container-factura{
-    width: 400px;
+    position: relative;
     background-color: #5fb0e4;
 }
 
