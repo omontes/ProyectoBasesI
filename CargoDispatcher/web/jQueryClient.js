@@ -23,7 +23,7 @@ function getClientes() {
     $.ajax({
         
         type: 'GET',
-        url: rootURL + "/ruta/getPeoresRutas",
+        url: rootURL + "/cliente/getPaquetes",
         dataType: "json",
         success: function(data) {
             $('#h1').append("Consulta Realizada");
