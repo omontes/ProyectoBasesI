@@ -14,6 +14,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.sql.CallableStatement;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -96,6 +97,25 @@ public class PaqueteDAOImpl extends DAO implements PaqueteDAO {
        finally {
             this.cerrarConexion();
         }
+    }
+
+    public PaqueteDTO desembalarPaquete(PaqueteDTO paquete) throws SQLException, Exception {
+       try {
+           String desembalarPaquete = this.leerSQL("/ArchivosSQL/desembalarPaquete.sql");
+           PreparedStatement stm = conexion.prepareStatement(desembalarPaquete);
+           stm.setInt(1, paquete.getIdPaquete());
+           stm.executeUpdate();
+           statement.close();
+
+           return paquete;
+        } catch (Exception e) {
+            System.out.println("Error al desembalar paquete");
+            throw(e);
+        }
+      finally {
+            this.cerrarConexion();
+        }
+    
     }
 
 
