@@ -384,9 +384,9 @@ function renderContenedores(data) {
 }
 
 function renderParametros(data) {
-    $("#edit-parametros #fecha").html(data[0].diaActual);
-    $("#edit-parametros #porcentaje").html(data[0].porcent_vol_contenedor);
-    $("#edit-parametros #costo").html(data[0].costo_almacenado);
+    $("#edit-parametros #fecha").val(data.diaActual);
+    $("#edit-parametros #porcentaje").val(data.porcent_vol_contenedor);
+    $("#edit-parametros #costo").val(data.costo_almacenado);
     }
 
 function renderPaquetesEmpleado(data) {
