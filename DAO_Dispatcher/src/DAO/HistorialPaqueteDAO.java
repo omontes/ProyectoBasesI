@@ -51,7 +51,7 @@ public class HistorialPaqueteDAO extends DAO {
             while (rs.next()) {
                 HistorialPaqueteDTO historialPaquete = new HistorialPaqueteDTO();
                 historialPaquete.setEstado(rs.getString("estado"));
-                historialPaquete.setFecha(rs.getDate("fecha"));
+                historialPaquete.setFecha(rs.getTimestamp("fecha"));
                 listaHistorialPaquete.add(historialPaquete);
             }  
             statement.close();
