@@ -44,8 +44,8 @@ public class ParametrosDAO extends DAO {
                 
         
         try {
-            String consultarClientes = this.leerSQL("/ArchivosSQL/ConsultaClientes.sql");
-            ResultSet rs = statement.executeQuery(consultarClientes);
+            String consultarParametros = this.leerSQL("/ArchivosSQL/ConsultaParametros.sql");
+            ResultSet rs = statement.executeQuery(consultarParametros);
             ParametrosDTO parametros = new ParametrosDTO();
             while (rs.next()) {
 
