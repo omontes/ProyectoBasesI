@@ -61,6 +61,7 @@ public class ClienteDAOImpl extends DAO implements ClienteDAO {
             ResultSet rs = stm.executeQuery();
             while (rs.next()) {
                 PaqueteDTO paquete = new PaqueteDTO();
+                paquete.setPeso(rs.getInt("peso"));
                 paquete.setIdPaquete(rs.getInt("idPaquete"));
                 paquete.setDescripcion(rs.getString("descripcion"));
                 paquete.setEstadoActual(rs.getString("EstadoActual"));
