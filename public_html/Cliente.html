@@ -28,15 +28,17 @@
                 $("#tabla-paquetes").hide();
                 $("#paquete-value").hide();
                 $("#login-cliente").click(function() {
-                    $("#tabla-paquetes").show();
+                    //$("#tabla-paquetes").show();
                     if ($("#cedula-cliente").val() !== "")
                         getPaquetesCliente();
                 });
                 $('body').on('click', '.campo-numero', function() {
                     $("#paquete-value").val($(this).html());
+                    getFacturaPaquete();
                 });
                 $('body').on('click', '.campo-estado', function() {
                     $("#paquete-value").val($(this).parents("tr").children(".campo-numero").html());
+                    getTrackingPaquete();
                 });
             });
         </script>
@@ -126,7 +128,7 @@
                                             </tr>
                                             <tr>
                                                 <td><strong>Subtotal</strong></td>
-                                                <td class="text-right">$60.00</td>
+                                                <td id="subtotal1" class="text-right">$60.00</td>
                                             </tr>
                                             <tr>
                                                 <td class="subtitulo-factura"><strong>Cargos del gobierno</strong></td>
@@ -139,11 +141,11 @@
                                             </tr>
                                             <tr>
                                                 <td><strong>Subtotal</strong></td>
-                                                <td class="text-right">$60.00</td>
+                                                <td id="subtotal2" class="text-right">$60.00</td>
                                             </tr>
                                             <tr>
                                                 <td class="thick-line text-center subtitulo-factura"><strong>Total</strong></td>
-                                                <td class="thick-line text-right subtitulo-factura">$670.99</td>
+                                                <td id="total" class="thick-line text-right subtitulo-factura">$670.99</td>
                                             </tr>
                                         </table>
                                     </div>
