@@ -25,9 +25,10 @@
         <!-- Metodos de la pagina actual-->
         <script>
             $(document).ready(function() {
+                $("#update-value").hide();
                 getPaquetesEmpleado();
                 $(".paq-add").click(function() {
-                    $("#edit-paquete #Heading").html("Agregar Cliente");
+                    $("#edit-paquete #Heading").html("Agregar Paquete");
                     $("#edit-paquete #numero").val("");
                     $("#edit-paquete #peso").val("");
                     $("#edit-paquete #descripcion").val("");
@@ -35,16 +36,29 @@
                     $("#edit-paquete #tipo").val("");
                     $("#edit-paquete #cliente").val("");
                 });
+                $('body').on('click', '.desalmacenar', function() {
+                    $("#update-value").val($(this).parents("tr").children("#campo-numero").html());
+                    desalmacenarPaquete();
+                });
+                $('body').on('click', '.desembalar', function() {
+                    $("#update-value").val($(this).parents("tr").children("#campo-numero").html());
+                    desembalarPaquete();
+                });
+                $(".btn-paq-post").click(function() {
+                    $('#edit-paquete').modal('hide');
+                    postPaquete();
+                });
             });
         </script>
     </head>
     <body>
+        <input id="update-value" type="text" class="form-control">
         <div class="bs-header" id="content">
             <div class="container">
                 <h1>CargoDispatcher - Empleado</h1>
             </div>
         </div>
-        <!-- Tabla Clientes-->
+        <!-- Tabla Paquetes-->
         <div class="container">
             <div class="row">
                 <div class="col-md-12">
@@ -76,7 +90,7 @@
                                     <th>Desembalar</th> 
                                 </tr>
                             </thead>
-                            <tbody id="cli-table-body">
+                            <tbody id="paq-table-body">
                                 <tr>
                                     <td id="campo-numero">115260289</td>
                                     <td id="campo-peso">12345</td>
