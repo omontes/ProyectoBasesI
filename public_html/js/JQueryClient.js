@@ -225,8 +225,8 @@ function getPaquetesCliente() {
         url: rootURL + "cliente/getPaquetes/" + $("#cedula-cliente").val(),
         dataType: "json",
         success: function(data) {
+            $("#tabla-paquetes").show();
             renderPaquetesCliente(data);
-            $("#tabla-paquetes").show;
         }
     });
 }
