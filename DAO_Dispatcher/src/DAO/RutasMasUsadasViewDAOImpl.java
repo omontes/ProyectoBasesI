@@ -53,8 +53,8 @@ public class RutasMasUsadasViewDAOImpl extends DAO implements RutasMasUsadasView
                 RutasMasUsadasViewDTO ruta = new RutasMasUsadasViewDTO();
                 ruta.setNombre(rs.getString("nombre"));
                 ruta.setIdRutaEnvio(rs.getInt("idRutaEnvio"));
-                ruta.setPto_llegada(rs.getString("idRutaEnvio"));
-                ruta.setPto_salida(rs.getString("idRutaEnvio"));
+                ruta.setPto_llegada(rs.getString("pto_llegada"));
+                ruta.setPto_salida(rs.getString("pto_salida"));
                 ListaRutas.add(ruta);
             }  
             statement.close();
