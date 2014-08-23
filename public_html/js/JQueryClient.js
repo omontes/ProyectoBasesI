@@ -182,7 +182,7 @@ function desalmacenarPaquete() {
     console.log('desalmacenarPaquete');
     $.ajax({
         type: 'GET',
-        url: rootURL + "paquete/desalmacenar/"+ $("#update-value").val(),
+        url: rootURL + "paquete/desalmacenar/" + $("#update-value").val(),
         dataType: "json",
         success: function() {
             getPaquetesEmpleado();
@@ -194,7 +194,7 @@ function desembalarPaquete() {
     console.log('desembalarPaquete');
     $.ajax({
         type: 'GET',
-        url: rootURL + "paquete/desembalar/"+ $("#update-value").val(),
+        url: rootURL + "paquete/desembalar/" + $("#update-value").val(),
         dataType: "json",
         success: function() {
             getPaquetesEmpleado();
@@ -220,9 +220,9 @@ function postPaquete() {
 // GET todos los paquetes de un cliente
 function getPaquetesCliente() {
     console.log('getPaquetesCliente');
-     $.ajax({
+    $.ajax({
         type: 'GET',
-        url: rootURL + "paquete/getPaquetesCliente/"+$("#cedula-cliente").val(),
+        url: rootURL + "paquete/getPaquetesCliente/" + $("#cedula-cliente").val(),
         dataType: "json",
         success: function(data) {
             renderPaquetesCliente(data);
@@ -233,9 +233,9 @@ function getPaquetesCliente() {
 
 function getFacturaPaquete() {
     console.log('getFacturaPaquete');
-     $.ajax({
+    $.ajax({
         type: 'GET',
-        url: rootURL + "factura/getFacturaPaquete/"+$("#paquete-value").val(),
+        url: rootURL + "factura/getFacturaPaquete/" + $("#paquete-value").val(),
         dataType: "json",
         success: function(data) {
             renderFacturaPaquete(data);
@@ -245,9 +245,9 @@ function getFacturaPaquete() {
 
 function getTrackingPaquete() {
     console.log('getTrackingPaquete');
-     $.ajax({
+    $.ajax({
         type: 'GET',
-        url: rootURL + "tracking/getTrackingPaquete/"+$("#paquete-value").val(),
+        url: rootURL + "tracking/getTrackingPaquete/" + $("#paquete-value").val(),
         dataType: "json",
         success: function(data) {
             renderTrackingPaquete(data);
@@ -257,7 +257,7 @@ function getTrackingPaquete() {
 
 function getMejoresClientes() {
     console.log('getMejoresClientes');
-     $.ajax({
+    $.ajax({
         type: 'GET',
         url: rootURL + "cliente/getMejoresClientes/",
         dataType: "json",
@@ -269,7 +269,7 @@ function getMejoresClientes() {
 
 function getPeoresClientes() {
     console.log('getPeoresClientes');
-     $.ajax({
+    $.ajax({
         type: 'GET',
         url: rootURL + "cliente/getPeoresClientes/",
         dataType: "json",
@@ -281,7 +281,7 @@ function getPeoresClientes() {
 
 function getMejoresRutas() {
     console.log('getMejoresRutas');
-     $.ajax({
+    $.ajax({
         type: 'GET',
         url: rootURL + "cliente/getMejoresRutas/",
         dataType: "json",
@@ -293,7 +293,7 @@ function getMejoresRutas() {
 
 function getPeoresRutas() {
     console.log('getPeoresRutas');
-     $.ajax({
+    $.ajax({
         type: 'GET',
         url: rootURL + "cliente/getPeoresRutas/",
         dataType: "json",
@@ -393,17 +393,39 @@ function renderPaquetesCliente(data) {
 }
 
 function renderFacturaPaquete(data) {
+    $("#factura-paquete #numero-paquete").html("Orden# " + $("#paquete-value").val());
+    $("#factura-flete").html("$" + data[0].flete);
+    $("#factura-almacenaje").html("$" + data[0].almacenaje);
+    $("#subtotal1").html("$" + (data[0].flete + data[0].almacenaje));
+    $("#factura-impuesto").html("$" + data[0].impuesto);
+    $("#subtotal2").html("$" + data[0].impuesto);
+    $("#total").html("$" + (data[0].flete + data[0].almacenaje + data[0].impuesto));
 }
 
+
 function renderTrackingPaquete(data) {
+    $("#tracking-paquete #numero-paquete").html("Orden# " + $("#paquete-value").val());
+    $("#estado1").html("no disponible");
+    $("#estado2").html("no disponible");
+    $("#estado3").html("no disponible");
+    $("#estado4").html("no disponible");
+    $("#estado5").html("no disponible");
+    var i;
+    for (i = 0; i < data.length; i++) {
+        if(data[i].Descripcion==="Ordenado")$("#estado1").html(data[i].Fecha);
+        if(data[i].Descripcion==="Almacenado")$("#estado2").html(data[i].Fecha);
+        if(data[i].Descripcion==="Transito")$("#estado3").html(data[i].Fecha);
+        if(data[i].Descripcion==="Listo")$("#estado4").html(data[i].Fecha);
+        if(data[i].Descripcion==="Entregado")$("#estado5").html(data[i].Fecha);
+    }
 }
 
 function renderMejoresClientes(data) {
     var i;
     var out = "";
     for (i = 0; i < data.length; i++) {
-        out += "<li class=\"list-group-item\">"+data[i].nombre+"<li>";
-        }
+        out += "<li class=\"list-group-item\">" + data[i].nombre + "<li>";
+    }
     $("#lista-mejores-clientes").html(out);
 }
 
@@ -411,8 +433,8 @@ function renderPeoresClientes(data) {
     var i;
     var out = "";
     for (i = 0; i < data.length; i++) {
-        out += "<li class=\"list-group-item\">"+data[i].nombre+"<li>";
-        }
+        out += "<li class=\"list-group-item\">" + data[i].nombre + "<li>";
+    }
     $("#lista-peores-clientes").html(out);
 }
 
@@ -420,8 +442,8 @@ function renderMejoresRutas(data) {
     var i;
     var out = "";
     for (i = 0; i < data.length; i++) {
-        out += "<li class=\"list-group-item\">"+data[i].nombre+" ( "+data[i].pto_salida+" - "+data[i].pto_llegada+" ) <li>";
-        }
+        out += "<li class=\"list-group-item\">" + data[i].nombre + " ( " + data[i].pto_salida + " - " + data[i].pto_llegada + " ) <li>";
+    }
     $("#lista-mejores-rutas").html(out);
 }
 
@@ -429,8 +451,8 @@ function renderPeoresRutas(data) {
     var i;
     var out = "";
     for (i = 0; i < data.length; i++) {
-        out += "<li class=\"list-group-item\">"+data[i].nombre+" ( "+data[i].pto_salida+" - "+data[i].pto_llegada+" ) <li>";
-        }
+        out += "<li class=\"list-group-item\">" + data[i].nombre + " ( " + data[i].pto_salida + " - " + data[i].pto_llegada + " ) <li>";
+    }
     $("#lista-peores-rutas").html(out);
 }
 
