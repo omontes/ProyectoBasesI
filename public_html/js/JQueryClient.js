@@ -283,7 +283,7 @@ function getMejoresRutas() {
     console.log('getMejoresRutas');
     $.ajax({
         type: 'GET',
-        url: rootURL + "cliente/getMejoresRutas/",
+        url: rootURL + "ruta/getMejoresRutas/",
         dataType: "json",
         success: function(data) {
             renderMejoresRutas(data);
@@ -295,7 +295,7 @@ function getPeoresRutas() {
     console.log('getPeoresRutas');
     $.ajax({
         type: 'GET',
-        url: rootURL + "cliente/getPeoresRutas/",
+        url: rootURL + "ruta/getPeoresRutas/",
         dataType: "json",
         success: function(data) {
             renderPeoresRutas(data);
@@ -387,13 +387,19 @@ function renderPaquetesCliente(data) {
         out += "<tr>";
         out += "<td class=\"campo-numero\" data-title=\"Factura-paquete\" data-toggle=\"modal\" data-target=\"#factura-paquete\">" + data[i].idPaquete + "</td>";
         out += "<td>" + data[i].descripcion + "</td>";
-        out += "<td class=\"campo-estado\" data-title=\"Tracking-paquete\" data-toggle=\"modal\" data-target=\"#tracking-paquete\">" + data[i].estado + "</td>";
+        out += "<td class=\"campo-estado\" data-title=\"Tracking-paquete\" data-toggle=\"modal\" data-target=\"#tracking-paquete\">" + data[i].estadoActual + "</td>";
     }
     $("#paq-table-body").html(out);
 }
 
 function renderFacturaPaquete(data) {
     $("#factura-paquete #numero-paquete").html("Orden# " + $("#paquete-value").val());
+    $("#factura-flete").html("$0,00");
+    $("#factura-almacenaje").html("$0,00");
+    $("#subtotal1").html("$0,00");
+    $("#factura-impuesto").html("$0,00");
+    $("#subtotal2").html("$0,00");
+    $("#total").html("$0,00");
     $("#factura-flete").html("$" + data[0].flete);
     $("#factura-almacenaje").html("$" + data[0].almacenaje);
     $("#subtotal1").html("$" + (data[0].flete + data[0].almacenaje));
@@ -412,11 +418,11 @@ function renderTrackingPaquete(data) {
     $("#estado5").html("no disponible");
     var i;
     for (i = 0; i < data.length; i++) {
-        if(data[i].Descripcion==="Ordenado")$("#estado1").html(data[i].Fecha);
-        if(data[i].Descripcion==="Almacenado")$("#estado2").html(data[i].Fecha);
-        if(data[i].Descripcion==="Transito")$("#estado3").html(data[i].Fecha);
-        if(data[i].Descripcion==="Listo")$("#estado4").html(data[i].Fecha);
-        if(data[i].Descripcion==="Entregado")$("#estado5").html(data[i].Fecha);
+        if(data[i].estado==="Ordenado")$("#estado1").html(data[i].fecha);
+        if(data[i].estado==="Almacenado")$("#estado2").html(data[i].fecha);
+        if(data[i].estado==="Transito")$("#estado3").html(data[i].fecha);
+        if(data[i].estado==="Listo")$("#estado4").html(data[i].fecha);
+        if(data[i].estado==="Entregado")$("#estado5").html(data[i].fecha);
     }
 }
 
