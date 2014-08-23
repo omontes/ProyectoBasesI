@@ -50,11 +50,7 @@ public class PaqueteDAOImpl extends DAO implements PaqueteDAO {
         try {
             CallableStatement cs = this.conexion.prepareCall("{call desalmacenarPaquete(?)}");
             cs.setInt(1,paquete.getIdPaquete());
-            //cs.registerOutParameter(2, java.sql.Types.VARCHAR);
-            //cs.registerOutParameter(3, java.sql.Types.INTEGER);
             cs.execute();
-            //System.out.println(cs.getString(2));
-            //System.out.println(cs.getInt(3));
             cs.close();
             return paquete;
         } catch (Exception e) {
@@ -116,6 +112,55 @@ public class PaqueteDAOImpl extends DAO implements PaqueteDAO {
             this.cerrarConexion();
         }
     
+    }
+
+    public PaqueteDTO crearPaquete(PaqueteDTO paquete) throws SQLException {
+        try {
+            
+            String insertarPaquete= this.leerSQL("/ArchivosSQL/insertarPaquete.sql");
+            PreparedStatement ps = conexion.prepareStatement(insertarPaquete);
+            int tipo=this.obtenerTipoPaquete(paquete);
+            ps.setInt(1, paquete.getIdPaquete());
+            ps.setInt(2, paquete.getPeso());
+            ps.setString(3, paquete.getDescripcion());
+            ps.setBigDecimal(4, paquete.getValor());
+            ps.setInt(5, tipo);
+            ps.setInt(6, paquete.getIdCliente());
+            ps.executeUpdate();
+            
+            
+            ps.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw new RuntimeException(e);
+	       } finally {
+            this.cerrarConexion();
+        }
+        return paquete;
+    }
+
+    private int obtenerTipoPaquete(PaqueteDTO paquete) throws Exception  {
+         int idTipo = 0;    
+         try {
+            String obtenerTipoPaquete= this.leerSQL("/ArchivosSQL/obtenerTipoPaquete.sql");
+            PreparedStatement stm = conexion.prepareStatement(obtenerTipoPaquete);
+            stm.setString(1,paquete.getCategoria());
+            ResultSet rs = stm.executeQuery();
+            while (rs.next()) {
+                idTipo=rs.getInt("idCategoriaPaquetes");
+                
+            }
+            statement.close();
+            return idTipo;
+            
+
+
+        } catch (Exception e) {
+            System.out.println("Error al realizar la consulta de obtener "
+                    + "el tipo del cliente");
+            throw(e);
+
+        }
     }
 
 
