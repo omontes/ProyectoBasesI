@@ -181,11 +181,9 @@ function getPaquetesEmpleado() {
 function desalmacenarPaquete() {
     console.log('desalmacenarPaquete');
     $.ajax({
-        type: 'POST',
-        contentType: 'application/json',
-        url: rootURL + "paquete/desalmacenar",
+        type: 'GET',
+        url: rootURL + "paquete/desalmacenar"+ $("#update-value").val(),
         dataType: "json",
-        data: "[{\"idPaquete\":" + $("#update-value").val() + "}]",
         success: function() {
             getPaquetesEmpleado();
         }
@@ -195,11 +193,9 @@ function desalmacenarPaquete() {
 function desembalarPaquete() {
     console.log('desembalarPaquete');
     $.ajax({
-        type: 'POST',
-        contentType: 'application/json',
-        url: rootURL + "paquete/desembalar",
+        type: 'GET',
+        url: rootURL + "paquete/desembalar"+ $("#update-value").val(),
         dataType: "json",
-        data: "[{\"idPaquete\":" + $("#update-value").val() + "}]",
         success: function() {
             getPaquetesEmpleado();
         }
@@ -259,6 +255,53 @@ function getTrackingPaquete() {
     });
 }
 
+function getMejoresClientes() {
+    console.log('getMejoresClientes');
+     $.ajax({
+        type: 'GET',
+        url: rootURL + "cliente/getMejoresClientes/",
+        dataType: "json",
+        success: function(data) {
+            renderMejoresClientes(data);
+        }
+    });
+}
+
+function getPeoresClientes() {
+    console.log('getPeoresClientes');
+     $.ajax({
+        type: 'GET',
+        url: rootURL + "cliente/getPeoresClientes/",
+        dataType: "json",
+        success: function(data) {
+            renderPeoresClientes(data);
+        }
+    });
+}
+
+function getMejoresRutas() {
+    console.log('getMejoresRutas');
+     $.ajax({
+        type: 'GET',
+        url: rootURL + "cliente/getMejoresRutas/",
+        dataType: "json",
+        success: function(data) {
+            renderMejoresRutas(data);
+        }
+    });
+}
+
+function getPeoresRutas() {
+    console.log('getPeoresRutas');
+     $.ajax({
+        type: 'GET',
+        url: rootURL + "cliente/getPeoresRutas/",
+        dataType: "json",
+        success: function(data) {
+            renderPeoresRutas(data);
+        }
+    });
+}
 function renderClientes(data) {
     var i;
     var out = "";
@@ -325,11 +368,11 @@ function renderPaquetesEmpleado(data) {
         out += "<td id=\"campo-valor\">" + data[i].valor + "</td>";
         out += "<td id=\"campo-tipo\">" + data[i].categoria + "</td>";
         out += "<td id=\"campo-cliente\">" + data[i].idCliente + "</td>";
-        if (data[i].idEstado === "2") {
+        if (data[i].estado === 2) {
             out += "<td><p><button class=\"btn btn-primary btn-xs desalmacenar\" data-title=\"Desalmacenar\" ><span class=\"glyphicon glyphicon-plane\"></span></button></p><td>";
             out += "<td><td>";
         }
-        if (data[i].idEstado === "5") {
+        if (data[i].estado === 5) {
             out += "<td><td>";
             out += "<td><p><button class=\"btn btn-primary btn-xs desembalar\" data-title=\"Desembalar\" ><span class=\"glyphicon glyphicon-gift\"></span></button></p><td>";
         }
@@ -353,6 +396,42 @@ function renderFacturaPaquete(data) {
 }
 
 function renderTrackingPaquete(data) {
+}
+
+function renderMejoresClientes(data) {
+    var i;
+    var out = "";
+    for (i = 0; i < data.length; i++) {
+        out += "<li class=\"list-group-item\">"+data[i].nombre+"<li>";
+        }
+    $("#lista-mejores-clientes").html(out);
+}
+
+function renderPeoresClientes(data) {
+    var i;
+    var out = "";
+    for (i = 0; i < data.length; i++) {
+        out += "<li class=\"list-group-item\">"+data[i].nombre+"<li>";
+        }
+    $("#lista-peores-clientes").html(out);
+}
+
+function renderMejoresRutas(data) {
+    var i;
+    var out = "";
+    for (i = 0; i < data.length; i++) {
+        out += "<li class=\"list-group-item\">"+data[i].nombre+" ( "+data[i].pto_salida+" - "+data[i].pto_llegada+" ) <li>";
+        }
+    $("#lista-mejores-rutas").html(out);
+}
+
+function renderPeoresRutas(data) {
+    var i;
+    var out = "";
+    for (i = 0; i < data.length; i++) {
+        out += "<li class=\"list-group-item\">"+data[i].nombre+" ( "+data[i].pto_salida+" - "+data[i].pto_llegada+" ) <li>";
+        }
+    $("#lista-peores-rutas").html(out);
 }
 
 function clienteToJSON() {
