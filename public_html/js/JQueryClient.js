@@ -182,7 +182,7 @@ function desalmacenarPaquete() {
     console.log('desalmacenarPaquete');
     $.ajax({
         type: 'GET',
-        url: rootURL + "paquete/desalmacenar"+ $("#update-value").val(),
+        url: rootURL + "paquete/desalmacenar/"+ $("#update-value").val(),
         dataType: "json",
         success: function() {
             getPaquetesEmpleado();
@@ -194,7 +194,7 @@ function desembalarPaquete() {
     console.log('desembalarPaquete');
     $.ajax({
         type: 'GET',
-        url: rootURL + "paquete/desembalar"+ $("#update-value").val(),
+        url: rootURL + "paquete/desembalar/"+ $("#update-value").val(),
         dataType: "json",
         success: function() {
             getPaquetesEmpleado();
