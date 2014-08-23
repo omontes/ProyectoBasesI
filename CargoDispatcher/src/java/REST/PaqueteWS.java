@@ -36,8 +36,6 @@ public class PaqueteWS {
     public PaqueteWS() {
     }
 
-
- 
     @GET
     @Path("/getPaquetesEmpleado")
     @Produces("application/json")
