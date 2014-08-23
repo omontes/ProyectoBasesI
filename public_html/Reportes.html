@@ -26,6 +26,14 @@
         <script src="js/jQueryClient.js"></script>
         <!-- Metodos Javascript de la interfaz-->
         <script src="js/DesignScripts.js"></script>
+        <script>
+            $(document).ready(function() {
+                getMejoresClientes();
+                getPeoresClientes();
+                getMejoresRutas();
+                getPeoresRutas();
+            });
+        </script>
 
     </head>
     <body>
@@ -41,7 +49,7 @@
                     <h3>Mejores Clientes</h3>
                     <div class="space"></div>
                 </div>
-                <ul class="list-group">
+                <ul id="lista-mejores-clientes" class="list-group">
                     <li class="list-group-item">Juanito</li>
                     <li class="list-group-item">Juanito</li>
                     <li class="list-group-item">Juanito</li>
@@ -60,7 +68,7 @@
                     <h3>Peores Clientes</h3>
                     <div class="space"></div>
                 </div>
-                <ul class="list-group">
+                <ul id="lista-peores-clientes" class="list-group">
                     <li class="list-group-item">Juanito</li>
                     <li class="list-group-item">Juanito</li>
                     <li class="list-group-item">Juanito</li>
@@ -79,7 +87,7 @@
                     <h3>Rutas mas utilizadas</h3>
                     <div class="space"></div>
                 </div>
-                <ul class="list-group">
+                <ul id="lista-mejores-rutas" class="list-group">
                     <li class="list-group-item">Juanito (San Jose-Caldera)</li>
                     <li class="list-group-item">Juanito (San Jose-Caldera)</li>
                     <li class="list-group-item">Juanito (San Jose-Caldera)</li>
@@ -98,7 +106,7 @@
                     <h3>Rutas menos utilizadas</h3>
                     <div class="space"></div>
                 </div>
-                <ul class="list-group">
+                <ul id="lista-peores-rutas" class="list-group">
                     <li class="list-group-item">Juanito (San Jose-Caldera)</li>
                     <li class="list-group-item">Juanito (San Jose-Caldera)</li>
                     <li class="list-group-item">Juanito (San Jose-Caldera)</li>

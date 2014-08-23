@@ -25,12 +25,23 @@
         <!-- Metodos de la pagina actual-->
         <script>
             $(document).ready(function() {
-                //getPaquetesCliente();
-                
+                $("#tabla-paquetes").hide();
+                $("#login-cliente").click(function() {
+                    $("#tabla-paquetes").show();
+                    if ($("#cedula-cliente").val() !== "")
+                        getPaquetesCliente();
+                });
+                $('body').on('click', '.campo-numero', function() {
+
+                }
+                $('body').on('click', '.campo-estado', function() {
+
+                }
             });
         </script>
     </head>
     <body>
+        <input id="paquete-value" type="text" class="form-control">
         <div class="bs-header" id="content">
             <div class="container">
                 <h1>CargoDispatcher - Cliente</h1>
@@ -41,16 +52,14 @@
             <div class="login-container">
                 <div id="output"></div>
                 <div class="form-box">
-                    <form>
-                        <input name="cliente" type="text" placeholder="Número de cedula">
-                            <button class="btn btn-info btn-block login">Login</button>
-                    </form>
+                    <input id="cedula-cliente" type="text" class="form-control">
+                    <button id="login-cliente" class="btn btn-info">Login</button>
                 </div>
             </div>
         </div>
 
         <!-- Tabla Paquetes-->
-        <div class="container">
+        <div id="tabla-paquetes" class="container">
             <div class="row">
                 <div class="col-md-12">
                     <div class="panel panel-primary">
@@ -88,118 +97,112 @@
 
         <div class="modal fade" id="factura-paquete" tabindex="-1" role="dialog" aria-labelledby="edit" aria-hidden="true">
             <div class="modal-dialog">
-                <table>
-                    <tr>
-                        <td>
-                            <div class="container-factura">
-                                <div class="titulo-factura">
-                                    <h2>Factura</h2><h3 id="numero-paquete" class="pull-right">Orden# 12345</h3>
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-12">
-                                        <div class="panel panel-default">
-                                            <table class="table table-condensed tabla-factura">
-                                                <tr>
-                                                    <td class="subtitulo-factura"><strong>Nuestros Cargos</strong></td>
-                                                    <td class="text-right subtitulo-factura"><strong>USD</strong></td>
-                                                </tr>
-                                                <tr>
-                                                    <td>Flete</td>
-                                                    <td id="factura-flete" class="text-right">$60.00</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>Costo de Almacenaje</td>
-                                                    <td id="factura-almacenaje" class="text-right">$60.00</td>
-                                                </tr>
-                                                <tr>
-                                                    <td><strong>Subtotal</strong></td>
-                                                    <td class="text-right">$60.00</td>
-                                                </tr>
-                                                <tr>
-                                                    <td class="subtitulo-factura"><strong>Cargos del gobierno</strong></td>
-                                                    <td class="text-right"><strong></strong></td>
-                                                </tr>
-                                                <!-- foreach ($order->lineItems as $line) or some such thing here -->
-                                                <tr>
-                                                    <td>IV Importación</td>
-                                                    <td id="factura-impuesto" class="text-right">$10.99</td>
-                                                </tr>
-                                                <tr>
-                                                    <td><strong>Subtotal</strong></td>
-                                                    <td class="text-right">$60.00</td>
-                                                </tr>
-                                                <tr>
-                                                    <td class="thick-line text-center subtitulo-factura"><strong>Total</strong></td>
-                                                    <td class="thick-line text-right subtitulo-factura">$670.99</td>
-                                                </tr>
-                                            </table>
-                                        </div>
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                        <h3 class="modal-title custom_align" id="Heading"></h3>
+                    </div>
+                    <div class="modal-body">
+                        <div class="container-factura">
+                            <div class="titulo-factura">
+                                <h2>Factura</h2><h3 id="numero-paquete" class="pull-right">Orden# 12345</h3>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="panel panel-default">
+                                        <table class="table table-condensed tabla-factura">
+                                            <tr>
+                                                <td class="subtitulo-factura"><strong>Nuestros Cargos</strong></td>
+                                                <td class="text-right subtitulo-factura"><strong>USD</strong></td>
+                                            </tr>
+                                            <tr>
+                                                <td>Flete</td>
+                                                <td id="factura-flete" class="text-right">$60.00</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Costo de Almacenaje</td>
+                                                <td id="factura-almacenaje" class="text-right">$60.00</td>
+                                            </tr>
+                                            <tr>
+                                                <td><strong>Subtotal</strong></td>
+                                                <td class="text-right">$60.00</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="subtitulo-factura"><strong>Cargos del gobierno</strong></td>
+                                                <td class="text-right"><strong></strong></td>
+                                            </tr>
+                                            <!-- foreach ($order->lineItems as $line) or some such thing here -->
+                                            <tr>
+                                                <td>IV Importación</td>
+                                                <td id="factura-impuesto" class="text-right">$10.99</td>
+                                            </tr>
+                                            <tr>
+                                                <td><strong>Subtotal</strong></td>
+                                                <td class="text-right">$60.00</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="thick-line text-center subtitulo-factura"><strong>Total</strong></td>
+                                                <td class="thick-line text-right subtitulo-factura">$670.99</td>
+                                            </tr>
+                                        </table>
                                     </div>
                                 </div>
                             </div>
-                        </td>
-
-                        <td>
-
-                        </td>
-                    </tr>
-                </table>
-
+                        </div>
+                    </div>
+                </div>
             </div>
             <!-- /.modal-dialog --> 
         </div>
 
         <div class="modal fade" id="tracking-paquete" tabindex="-1" role="dialog" aria-labelledby="edit" aria-hidden="true">
             <div class="modal-dialog">
-                <table>
-                    <tr>
-                        <td>
-                            <div class="container-factura">
-                                <div class="titulo-factura">
-                                    <h2>Tracking</h2><h3 id="numero-paquete" class="pull-right">Orden# 12345</h3>
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-12">
-                                        <div class="panel panel-default">
-                                            <table class="table table-condensed tabla-factura">
-                                                <tr>
-                                                    <td class="subtitulo-factura"><strong>Estado</strong></td>
-                                                    <td class="text-right subtitulo-factura"><strong>Fecha</strong></td>
-                                                </tr>
-                                                <tr>
-                                                    <td>Recibido de Transportista</td>
-                                                    <td id="estado1" class="text-right">07/08/2014 12:48:45</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>Paquete almacenado</td>
-                                                    <td id="estado2" class="text-right">07/08/2014 16:37:31</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>En Transito</td>
-                                                    <td id="estado3" class="text-right">08/08/2014 11:00:38</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>Procesado en el Destino</td>
-                                                    <td id="estado4" class="text-right">09/08/2014 10:10:07</td>
-                                                </tr>
-                                                
-                                                <tr>
-                                                    <td>Entregado</td>
-                                                    <td id="estado5" class="text-right">09/08/2014 17:21:00</td>
-                                                </tr>
-                                            </table>
-                                        </div>
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                        <h3 class="modal-title custom_align" id="Heading"></h3>
+                    </div>
+                    <div class="modal-body">
+                        <div class="container-factura">
+                            <div class="titulo-factura">
+                                <h2>Tracking</h2><h3 id="numero-paquete" class="pull-right">Orden# 12345</h3>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="panel panel-default">
+                                        <table class="table table-condensed tabla-factura">
+                                            <tr>
+                                                <td class="subtitulo-factura"><strong>Estado</strong></td>
+                                                <td class="text-right subtitulo-factura"><strong>Fecha</strong></td>
+                                            </tr>
+                                            <tr>
+                                                <td>Recibido de Transportista</td>
+                                                <td id="estado1" class="text-right">07/08/2014 12:48:45</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Paquete almacenado</td>
+                                                <td id="estado2" class="text-right">07/08/2014 16:37:31</td>
+                                            </tr>
+                                            <tr>
+                                                <td>En Transito</td>
+                                                <td id="estado3" class="text-right">08/08/2014 11:00:38</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Procesado en el Destino</td>
+                                                <td id="estado4" class="text-right">09/08/2014 10:10:07</td>
+                                            </tr>
+
+                                            <tr>
+                                                <td>Entregado</td>
+                                                <td id="estado5" class="text-right">09/08/2014 17:21:00</td>
+                                            </tr>
+                                        </table>
                                     </div>
                                 </div>
                             </div>
-                        </td>
-
-                        <td>
-
-                        </td>
-                    </tr>
-                </table>
-
+                        </div>
+                    </div>
+                </div>
             </div>
             <!-- /.modal-dialog --> 
         </div>
